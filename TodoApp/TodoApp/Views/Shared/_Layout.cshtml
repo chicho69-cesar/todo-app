@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+        <title>@ViewData["Title"]</title>
+
+        <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/TodoApp.styles.css" asp-append-version="true" />
+    </head>
+
+    <body>
+        <header>
+            <nav>
+                <a asp-controller="Home" asp-action="Index">TodoApp</a>
+
+                <ul>
+                    <li>
+                        <a asp-controller="Home" asp-action="Index">
+                            Home
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+
+        <main role="main">
+            @RenderBody()
+        </main>
+
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+    
+        @await RenderSectionAsync("Scripts", required: false)
+    </body>
+</html>
