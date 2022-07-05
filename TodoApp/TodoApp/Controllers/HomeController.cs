@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using TodoApp.Models;
 
@@ -12,11 +13,6 @@ namespace TodoApp.Controllers {
 
         [HttpGet]
         public IActionResult Index() {
-            return View();
-        }
-
-        [Route("error/404")]
-        public IActionResult Error404() {
             return View();
         }
 
