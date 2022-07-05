@@ -5,6 +5,8 @@ using Microsoft.EntityFrameworkCore;
 using TodoApp.Data;
 using TodoApp.Data.Entities;
 using TodoApp.Helpers;
+using TodoApp.Services;
+using TodoApp.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,7 +31,7 @@ builder.Services.AddIdentityCore<User>(config => {
     config.Password.RequireUppercase = false;
     config.Password.RequiredLength = 8;
     config.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
-    config.Lockout.MaxFailedAccessAttempts = 5;
+    config.Lockout.MaxFailedAccessAttempts = 3;
     config.Lockout.AllowedForNewUsers = true;
 })
     .AddDefaultTokenProviders()
@@ -42,13 +44,13 @@ builder.Services.AddAuthentication(options => {
     options.DefaultSignOutScheme = IdentityConstants.ApplicationScheme;
 }).AddCookie(IdentityConstants.ApplicationScheme, options => {
     options.LoginPath = "/Users/Login";
-});
-
-builder.Services.ConfigureApplicationCookie(options => {
-    options.LoginPath = "/Users/NotAuthorized";
     options.AccessDeniedPath = "/Users/NotAuthorized";
 });
 
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IBlobService, BlobService>();
+builder.Services.AddScoped<SignInManager<User>>();
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 
 var app = builder.Build();
