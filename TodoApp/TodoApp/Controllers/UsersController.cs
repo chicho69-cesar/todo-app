@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using TodoApp.Data;
@@ -8,17 +9,20 @@ using TodoApp.Services.Interfaces;
 
 namespace TodoApp.Controllers {
     public class UsersController : Controller {
+        private readonly ILogger _logger;
         private readonly DataContext _context;
         private readonly IUserService _userService;
         private readonly IBlobService _blobService;
         private readonly SignInManager<User> _signInManager;
 
         public UsersController(
+            ILogger<UsersController> logger,
             DataContext context,
             IUserService userService,
             IBlobService blobService,
             SignInManager<User> signInManager
         ) {
+            _logger = logger;
             _context = context;
             _userService = userService;
             _blobService = blobService;
@@ -38,13 +42,17 @@ namespace TodoApp.Controllers {
         [HttpPost]
         [AllowAnonymous]
         public async Task<IActionResult> Login(LoginViewModel model) {
+            _logger.LogInformation(model.Email);
+            
             if (!ModelState.IsValid) {
+                ModelState.AddModelError(string.Empty, "Tienes un error en los datos");
                 return View(model);
             }
 
-            Microsoft.AspNetCore.Identity.SignInResult result = await _userService.LoginAsync(model);
+            var result = await _userService.LoginAsync(model);
 
             if (result.Succeeded) {
+                _logger.LogInformation("Si llego aqui");
                 return RedirectToAction("Index", "Home");
             }
 
@@ -57,9 +65,9 @@ namespace TodoApp.Controllers {
             return View(model);
         }
 
-        [HttpGet]
+        [HttpPost]
         public async Task<IActionResult> Logout() {
-            await _userService.LogoutAsync();
+            await HttpContext.SignOutAsync(IdentityConstants.ApplicationScheme);
             return RedirectToAction("Login", "Users");
         }
 
@@ -75,7 +83,6 @@ namespace TodoApp.Controllers {
 
         [HttpPost]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterViewModel model) {
             if (!ModelState.IsValid) {
                 return View(model);
@@ -88,24 +95,15 @@ namespace TodoApp.Controllers {
             }
 
             model.ImageId = imageId;
-            IdentityResult result = await _userService.AddUserAsync(model);
+            var user = await _userService.AddUserAsync(model);
 
-            if (result is null) {
+            if (user is null) {
+                _logger.LogInformation("Me esta regresando null alv");
                 ModelState.AddModelError(string.Empty, "Este correo ya esta siendo usado, o la contraseña es incorrecta");
                 return View(model);
-            }
-
-            if (result.Succeeded) {
-                var user = await _userService.GetUserAsync(model.Email);
-                await _signInManager.SignInAsync(user, isPersistent: true);
-                
-                return RedirectToAction("Index", "Home");
             } else {
-                foreach (var error in result.Errors) {
-                    ModelState.AddModelError(string.Empty, error.Description);
-                }
-
-                return View(model);
+                await _signInManager.SignInAsync(user, isPersistent: true);
+                return RedirectToAction("Index", "Home");
             }
         }
 

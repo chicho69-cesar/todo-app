@@ -20,6 +20,7 @@ namespace TodoApp.Data.Entities {
 
         public ICollection<UserGroup> UserGroups { get; set; }
 
+        //TODO: Cambiar la ruta para el despliegue
         [Display(Name = "Foto")]
         public string ImageFullPath => ImageId == Guid.Empty
             ? $"https://localhost:7193/images/noimage.png"

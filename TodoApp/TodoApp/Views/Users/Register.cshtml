@@ -4,4 +4,24 @@
     ViewData["Title"] = "Registrate";
 }
 
-<h1>Registrate</h1>
+<h1 class="title">Registrate</h1>
+
+<form asp-action="Register" enctype="multipart/form-data" class="form">
+    <div asp-validation-summary="ModelOnly" class="error"></div>
+    <input type="hidden" asp-for="Id" />
+    
+    <partial name="_RegisterUser" model="@Model"/>
+
+    <p class="text">
+        ¿Ya tienes una cuenta? 
+        <a asp-action="Login">Da click aquí...</a>
+    </p>
+
+    <button type="submit" value="Register" class="btn">
+        ¡Listo!
+    </button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

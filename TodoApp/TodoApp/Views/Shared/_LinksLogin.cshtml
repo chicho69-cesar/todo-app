@@ -1,0 +1,17 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using TodoApp.Data.Entities
+@inject SignInManager<User> SignInManager
+
+@if (SignInManager.IsSignedIn(User)) {
+    <li>
+        <span>@User.Identity.Name</span>
+    </li>
+
+    <li>
+        <form asp-action="Logout" asp-controller="Users">
+            <button type="submit">
+                Logout
+            </button>
+        </form>
+    </li>
+}

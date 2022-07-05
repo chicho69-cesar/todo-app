@@ -25,7 +25,7 @@ namespace TodoApp.Services {
             return await _userManager.CreateAsync(user, password);
         }
 
-        public async Task<IdentityResult> AddUserAsync(RegisterViewModel model) {
+        public async Task<User> AddUserAsync(RegisterViewModel model) {
             var user = new User {
                 Email = model.Email,
                 UserName = model.Username,
@@ -34,13 +34,15 @@ namespace TodoApp.Services {
                 ImageId = model.ImageId
             };
 
-            IdentityResult result = await _userManager.CreateAsync(user, model.Password);
+            IdentityResult result = await _userManager.CreateAsync(user, password: model.Password);
 
             if (result != IdentityResult.Success) {
                 return null;
-            } else {
-                return result;
             }
+
+            User newUser = await GetUserAsync(model.Email);
+
+            return newUser;
         }
 
         public async Task<User> GetUserAsync(string email) {
@@ -56,7 +58,7 @@ namespace TodoApp.Services {
                 model.Email,
                 model.Password,
                 model.RememberMe,
-                true
+                lockoutOnFailure: false
             );
         }
 

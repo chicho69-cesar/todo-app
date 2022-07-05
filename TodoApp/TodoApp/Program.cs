@@ -23,16 +23,13 @@ builder.Services.AddDbContext<DataContext>(options => {
 });
 
 builder.Services.AddIdentityCore<User>(config => {
-    config.User.RequireUniqueEmail = true;
-    config.Password.RequireDigit = true;
+    config.User.RequireUniqueEmail = false;
+    config.Password.RequireDigit = false;
     config.Password.RequiredUniqueChars = 0;
-    config.Password.RequireLowercase = true;
+    config.Password.RequireLowercase = false;
     config.Password.RequireNonAlphanumeric = false;
     config.Password.RequireUppercase = false;
-    config.Password.RequiredLength = 8;
-    config.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
-    config.Lockout.MaxFailedAccessAttempts = 3;
-    config.Lockout.AllowedForNewUsers = true;
+    config.Password.RequiredLength = 6;
 })
     .AddDefaultTokenProviders()
     .AddErrorDescriber<ErrorMessagesIdentityHelper>()

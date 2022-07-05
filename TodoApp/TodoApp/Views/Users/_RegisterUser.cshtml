@@ -1,0 +1,55 @@
+﻿@model RegisterViewModel
+
+<section class="controls">
+    <div class="form-group">
+        <label asp-for="FirstName" class="form-label"></label>
+        <span class="required">*</span>
+        <input asp-for="FirstName" class="form-input" />
+        <span asp-validation-for="FirstName" class="error"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="LastName" class="form-label"></label>
+        <span class="required">*</span>
+        <input asp-for="LastName" class="form-input" />
+        <span asp-validation-for="LastName" class="error"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Email" class="form-label"></label>
+        <span class="required">*</span>
+        <input asp-for="Email" class="form-input" />
+        <span asp-validation-for="Email" class="error"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Username" class="form-label"></label>
+        <span class="required">*</span>
+        <input asp-for="Username" class="form-input" />
+        <span asp-validation-for="Username" class="error"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Password" class="form-label"></label>
+        <span class="required">*</span>
+        <input asp-for="Password" class="form-input" />
+        <span asp-validation-for="Password" class="error"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="PasswordConfirm" class="form-label"></label>
+        <span class="required">*</span>
+        <input asp-for="PasswordConfirm" class="form-input" />
+        <span asp-validation-for="PasswordConfirm" class="error"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ImageFile" class="form-label"></label>
+        <input asp-for="ImageFile" class="form-image" />
+        <span asp-validation-for="ImageFile" class="error"></span>
+    </div>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -5,7 +5,7 @@ using TodoApp.Models;
 namespace TodoApp.Services.Interfaces {
     public interface IUserService {
         Task<IdentityResult> AddUserAsync(User user, string password);
-        Task<IdentityResult> AddUserAsync(RegisterViewModel model);
+        Task<User> AddUserAsync(RegisterViewModel model);
         Task<User> GetUserAsync(string email);
         Task<SignInResult> LoginAsync(LoginViewModel model);
         Task LogoutAsync();

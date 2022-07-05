@@ -16,6 +16,7 @@ namespace TodoApp.Data.Entities {
 
         public ICollection<TaskWork> TaskWorks { get; set; }
 
+        //TODO: Cambiar la ruta para el despliegue
         [Display(Name = "Foto")]
         public string ImageFullPath => ImageId == Guid.Empty
             ? $"https://localhost:7193/images/noimage.png"
