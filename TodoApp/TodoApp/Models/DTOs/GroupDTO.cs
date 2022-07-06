@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace TodoApp.Data.Entities {
-    public class Group {
+namespace TodoApp.Models.DTOs {
+    public class GroupDTO {
         public int Id { get; set; }
 
         [Display(Name = "Nombre")]
@@ -12,9 +12,9 @@ namespace TodoApp.Data.Entities {
         [Display(Name = "Foto")]
         public Guid ImageId { get; set; }
 
-        public ICollection<UserGroup> UserGroups { get; set; }
+        public ICollection<UserGroupDTO> UserGroups { get; set; }
 
-        public ICollection<TaskWork> TaskWorks { get; set; }
+        public ICollection<TaskWorkDTO> TaskWorks { get; set; }
 
         //TODO: Cambiar la ruta para el despliegue
         [Display(Name = "Foto")]

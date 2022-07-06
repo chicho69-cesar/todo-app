@@ -1,6 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Identity
-@using TodoApp.Data.Entities
-@inject SignInManager<User> SignInManager
+@using TodoApp.Models.DTOs
+@inject SignInManager<UserDTO> SignInManager
 
 @if (SignInManager.IsSignedIn(User)) {
     <li>

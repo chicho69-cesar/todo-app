@@ -1,32 +1,33 @@
-﻿using Microsoft.AspNetCore.Authentication;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using TodoApp.Data;
-using TodoApp.Data.Entities;
 using TodoApp.Models;
+using TodoApp.Models.DTOs;
 using TodoApp.Services.Interfaces;
 
 namespace TodoApp.Controllers {
     public class UsersController : Controller {
-        private readonly ILogger _logger;
-        private readonly DataContext _context;
-        private readonly IUserService _userService;
+        private readonly TodoAppContext _context;
+        private readonly UserManager<UserDTO> _userManager;
+        private readonly SignInManager<UserDTO> _signInManager;
         private readonly IBlobService _blobService;
-        private readonly SignInManager<User> _signInManager;
+        private readonly IMapper _mapper;
 
         public UsersController(
-            ILogger<UsersController> logger,
-            DataContext context,
-            IUserService userService,
+            TodoAppContext context,
+            UserManager<UserDTO> userManager,
+            SignInManager<UserDTO> signInManager,
             IBlobService blobService,
-            SignInManager<User> signInManager
+            IMapper mapper
         ) {
-            _logger = logger;
             _context = context;
-            _userService = userService;
-            _blobService = blobService;
+            _userManager = userManager;
             _signInManager = signInManager;
+            _blobService = blobService;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -42,43 +43,31 @@ namespace TodoApp.Controllers {
         [HttpPost]
         [AllowAnonymous]
         public async Task<IActionResult> Login(LoginViewModel model) {
-            _logger.LogInformation(model.Email);
-            
             if (!ModelState.IsValid) {
                 ModelState.AddModelError(string.Empty, "Tienes un error en los datos");
                 return View(model);
             }
 
-            var result = await _userService.LoginAsync(model);
+            var resultado = await _signInManager.PasswordSignInAsync(model.Username, model.Password, model.RememberMe, lockoutOnFailure: false);
 
-            if (result.Succeeded) {
-                _logger.LogInformation("Si llego aqui");
+            if (resultado.Succeeded) {
                 return RedirectToAction("Index", "Home");
-            }
-
-            if (result.IsLockedOut) {
-                ModelState.AddModelError(string.Empty, "Ha superado el máximo número de intentos, su cuenta está bloqueada, intente de nuevo en 5 minutos.");
             } else {
-                ModelState.AddModelError(string.Empty, "Email o contraseña incorrectos.");
+                ModelState.AddModelError(string.Empty, "Correo electronico o password incorrecto.");
+                return View(model);
             }
-
-            return View(model);
         }
 
         [HttpPost]
         public async Task<IActionResult> Logout() {
             await HttpContext.SignOutAsync(IdentityConstants.ApplicationScheme);
-            return RedirectToAction("Login", "Users");
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpGet]
         [AllowAnonymous]
         public IActionResult Register() {
-            var model = new RegisterViewModel {
-                Id = Guid.Empty.ToString()
-            };
-
-            return View(model);
+            return View();
         }
 
         [HttpPost]
@@ -95,15 +84,21 @@ namespace TodoApp.Controllers {
             }
 
             model.ImageId = imageId;
-            var user = await _userService.AddUserAsync(model);
 
-            if (user is null) {
-                _logger.LogInformation("Me esta regresando null alv");
-                ModelState.AddModelError(string.Empty, "Este correo ya esta siendo usado, o la contraseña es incorrecta");
-                return View(model);
-            } else {
+            var userStorage = _mapper.Map<User>(model);
+            var user = _mapper.Map<UserDTO>(userStorage);
+
+            var result = await _userManager.CreateAsync(user, password: model.Password);
+
+            if (result.Succeeded) {
                 await _signInManager.SignInAsync(user, isPersistent: true);
                 return RedirectToAction("Index", "Home");
+            } else {
+                foreach (var error in result.Errors) {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
+
+                return View(model);
             }
         }
 

@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using TodoApp.Enums;
 
-namespace TodoApp.Data.Entities {
-    public class Note {
+namespace TodoApp.Models.DTOs {
+    public class NoteDTO {
         public int Id { get; set; }
 
         [Display(Name = "Nota")]
@@ -16,6 +16,6 @@ namespace TodoApp.Data.Entities {
         public StateTask State { get; set; }
 
         [Display(Name = "Usuario")]
-        public User User { get; set; }
+        public UserDTO User { get; set; }
     }
 }

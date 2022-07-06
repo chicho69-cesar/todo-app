@@ -2,7 +2,7 @@
 
 namespace TodoApp.Models {
     public class EditUserViewModel {
-        public string Id { get; set; }
+        public int Id { get; set; }
 
         [Display(Name = "Nombres")]
         [MaxLength(50, ErrorMessage = "El campo {0} debe tener máximo {1} caractéres.")]

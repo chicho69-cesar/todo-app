@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using TodoApp.Data;
-using TodoApp.Data.Entities;
 using TodoApp.Helpers;
+using TodoApp.Models.DTOs;
 using TodoApp.Services;
 using TodoApp.Services.Interfaces;
 
@@ -18,22 +18,18 @@ builder.Services.AddControllersWithViews(options => {
     options.Filters.Add(new AuthorizeFilter(AuthenticationPolicies));
 });
 
-builder.Services.AddDbContext<DataContext>(options => {
+builder.Services.AddDbContext<TodoAppContext>(options => {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
-builder.Services.AddIdentityCore<User>(config => {
-    config.User.RequireUniqueEmail = false;
+builder.Services.AddIdentityCore<UserDTO>(config => {
     config.Password.RequireDigit = false;
-    config.Password.RequiredUniqueChars = 0;
     config.Password.RequireLowercase = false;
     config.Password.RequireNonAlphanumeric = false;
     config.Password.RequireUppercase = false;
     config.Password.RequiredLength = 6;
 })
-    .AddDefaultTokenProviders()
-    .AddErrorDescriber<ErrorMessagesIdentityHelper>()
-    .AddEntityFrameworkStores<DataContext>();
+    .AddErrorDescriber<ErrorMessagesIdentityHelper>();
 
 builder.Services.AddAuthentication(options => {
     options.DefaultAuthenticateScheme = IdentityConstants.ApplicationScheme;
@@ -44,9 +40,12 @@ builder.Services.AddAuthentication(options => {
     options.AccessDeniedPath = "/Users/NotAuthorized";
 });
 
-builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IUserStore<UserDTO>, StoreUser>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IBlobService, BlobService>();
-builder.Services.AddScoped<SignInManager<User>>();
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<SignInManager<UserDTO>>();
+builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 
