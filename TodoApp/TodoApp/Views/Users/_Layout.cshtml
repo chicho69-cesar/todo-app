@@ -7,17 +7,20 @@
         <title>@ViewData["Title"]</title>
 
         <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/css/users/users.css" asp-append-version="true" />
         <link rel="stylesheet" href="~/TodoApp.styles.css" asp-append-version="true" />
         <link rel="stylesheet" href="TodoApp.styles.css" asp-append-version="true"/>
     </head>
 
-    <body>
+    <body class="light">
         <header>
             <div class="header-container">
-                <h1>TodoApp</h1>
+                <a asp-action="Login" asp-controller="Users" class="logo-link">
+                    <h1 class="logo-text">TodoApp</h1>
+                </a>
 
-                <button>
-                    Icono
+                <button class="switch-theme">
+                    <i class="bi bi-moon-stars"></i>
                 </button>
             </div>
         </header>
@@ -28,7 +31,8 @@
 
         <script src="~/lib/jquery/dist/jquery.min.js"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
-    
+        <script src="~/js/theme.js" asp-append-version="true"></script>
+
         @await RenderSectionAsync("Scripts", required: false)
     </body>
 </html>

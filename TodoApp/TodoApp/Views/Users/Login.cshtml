@@ -4,22 +4,32 @@
     ViewData["Title"] = "Iniciar sesión";
 }
 
-<h1 class="title">Iniciar sesión</h1>
+<section class="main">
+    <h1 class="title">Iniciar sesión</h1>
 
-<form asp-action="Login" class="form">
-    <div asp-validation-summary="ModelOnly" class="error"></div>
+    <form asp-action="Login" class="form">
+        <div asp-validation-summary="ModelOnly" class="error"></div>
 
-    <partial name="_LoginUser" model="@Model"/>
+        <partial name="_LoginUser" model="@Model"/>
 
-    <p class="text">
-        ¿Aún no tienes una cuenta? 
-        <a asp-action="Register">Registrate aquí...</a>
-    </p>
+        <button type="submit" value="Login" class="btn">
+            ¡Listo!
+        </button>
 
-    <button type="submit" value="Login" class="btn">
-        ¡Listo!
-    </button>
-</form>
+        <hr/>
+
+        <p class="form-text">
+            ¿Aún no tienes una cuenta? 
+            <a asp-action="Register">Registrate aquí...</a>
+        </p>
+    </form>
+</section>
+
+<style>
+    main {
+        margin: 2.5rem auto;
+    }
+</style>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

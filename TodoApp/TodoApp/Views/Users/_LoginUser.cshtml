@@ -2,22 +2,31 @@
 
 <section class="controls">
     <div class="form-group">
-        <label asp-for="Email" class="form-label"></label>
-        <span class="required">*</span>
+        <div class="label-group">
+            <label asp-for="Email" class="form-label"></label>
+            <span class="required">*</span>
+        </div>
+
         <input asp-for="Email" class="form-input" />
         <span asp-validation-for="Email" class="error"></span>
     </div>
 
     <div class="form-group">
-        <label asp-for="Username" class="form-label"></label>
-        <span class="required">*</span>
+        <div class="label-group">
+            <label asp-for="Username" class="form-label"></label>
+            <span class="required">*</span>
+        </div>
+
         <input asp-for="Username" class="form-input" />
         <span asp-validation-for="Username" class="error"></span>
     </div>
 
     <div class="form-group">
-        <label asp-for="Password" class="form-label"></label>
-        <span class="required">*</span>
+        <div class="label-group">
+            <label asp-for="Password" class="form-label"></label>
+            <span class="required">*</span>
+        </div>
+
         <input asp-for="Password" class="form-input" />
         <span asp-validation-for="Password" class="error"></span>
     </div>

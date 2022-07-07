@@ -4,22 +4,41 @@
     ViewData["Title"] = "Registrate";
 }
 
-<h1 class="title">Registrate</h1>
+<section class="main">
+    <h1 class="title">Registrate</h1>
 
-<form asp-action="Register" enctype="multipart/form-data" class="form">
-    <div asp-validation-summary="ModelOnly" class="error"></div>
+    <form asp-action="Register" enctype="multipart/form-data" class="form">
+        <div asp-validation-summary="ModelOnly" class="error"></div>
     
-    <partial name="_RegisterUser" model="@Model"/>
+        <partial name="_RegisterUser" model="@Model"/>
 
-    <p class="text">
-        ¿Ya tienes una cuenta? 
-        <a asp-action="Login">Da click aquí...</a>
-    </p>
+        <div class="buttons">
+            <label asp-for="ImageFile" class="label-image btn">
+                <i class="bi bi-card-image"></i>
+            </label>
 
-    <button type="submit" value="Register" class="btn">
-        ¡Listo!
-    </button>
-</form>
+            <input asp-for="ImageFile" class="form-image"/>
+            <span asp-validation-for="ImageFile" class="error"></span>
+
+            <button type="submit" value="Register" class="btn">
+                ¡Listo!
+            </button>
+        </div>
+
+        <hr/>
+
+        <p class="form-text">
+            ¿Ya tienes una cuenta? 
+            <a asp-action="Login">Da click aquí...</a>
+        </p>
+    </form>
+</section>
+
+<style>
+    main {
+        margin: 1rem auto;
+    }
+</style>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
