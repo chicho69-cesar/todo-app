@@ -48,9 +48,9 @@ namespace TodoApp.Controllers {
                 return View(model);
             }
 
-            var resultado = await _signInManager.PasswordSignInAsync(model.Username, model.Password, model.RememberMe, lockoutOnFailure: false);
+            var result = await _signInManager.PasswordSignInAsync(model.Username, model.Password, model.RememberMe, lockoutOnFailure: false);
 
-            if (resultado.Succeeded) {
+            if (result.Succeeded) {
                 return RedirectToAction("Index", "Home");
             } else {
                 ModelState.AddModelError(string.Empty, "Correo electronico o password incorrecto.");
