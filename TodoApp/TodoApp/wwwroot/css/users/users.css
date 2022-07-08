@@ -22,10 +22,10 @@
     --mainColor: #202020;
     --secondaryColor: #f0f0f0;
     --secondBackground: #151515;
-    --thirdBackground: #202020;
+    --thirdBackground: #151515;
     --hoverColor: #e1e1e1;
     --themeColor: linear-gradient(to bottom right, #fdc639, #ff7c60);
-    --borderColor: #171717;
+    --borderColor: #919191;
     --headerShadow: 5px 0 10px -5px rgba(125 125 125 / 25%);
     --buttonShadow: 0 0 15px -5px rgba(125 125 125 / 25%);
     --formShadow: 0 0 30px -15px rgba(0 0 0 / 50%);
@@ -149,13 +149,13 @@ main {
 
 .form-input {
     width: 100%;
-    margin: 0.125rem 0;
-    padding: 0.5rem 1rem;
+    margin: 0.25rem 0;
+    padding: 0.5rem 0;
     outline: none;
     color: var(--secondaryColor);
     background-color: var(--thirdBackground);
-    border: 1px solid var(--borderColor);
-    border-radius: 0.25rem;
+    border: none;
+    border-bottom: 1px solid var(--borderColor);
     font-size: 1.125rem;
 }
 
