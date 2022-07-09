@@ -4,13 +4,15 @@
 
 @if (SignInManager.IsSignedIn(User)) {
     <li>
-        <span>@User.Identity.Name</span>
+        <a asp-action="Details" asp-controller="Users" class="user-details">
+            @User.Identity.Name
+        </a>
     </li>
 
     <li>
         <form asp-action="Logout" asp-controller="Users">
-            <button type="submit">
-                Logout
+            <button type="submit" class="header-btn logout-btn">
+                I
             </button>
         </form>
     </li>

@@ -11,21 +11,23 @@
         <link rel="stylesheet" href="TodoApp.styles.css" asp-append-version="true"/>
     </head>
 
-    <body>
+    <body class="light">
         <header>
-            <nav>
-                <a asp-controller="Home" asp-action="Index">TodoApp</a>
+            <div class="header-container">
+                <a asp-action="Index" asp-controller="Home" class="logo-link">
+                    <h1 class="logo-text">TodoApp</h1>
+                </a>
 
-                <ul>
-                    <li>
-                        <a asp-controller="Home" asp-action="Index">
-                            Home
-                        </a>
-                    </li>
+                <div class="header-details">
+                    <ul class="header-list">
+                        <partial name="_LinksLogin"/>
+                    </ul>
 
-                    <partial name="_LinksLogin"/>
-                </ul>
-            </nav>
+                    <button class="switch-theme header-btn">
+                        <i class="bi bi-moon-stars"></i>
+                    </button>
+                </div>
+            </div>
         </header>
 
         <main role="main">
