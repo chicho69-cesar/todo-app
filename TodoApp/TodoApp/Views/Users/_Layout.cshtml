@@ -15,13 +15,19 @@
     <body class="light">
         <header>
             <div class="header-container">
-                <a asp-action="Login" asp-controller="Users" class="logo-link">
+                <a asp-action="Index" asp-controller="Home" class="logo-link">
                     <h1 class="logo-text">TodoApp</h1>
                 </a>
 
-                <button class="switch-theme header-btn">
-                    <i class="bi bi-moon-stars"></i>
-                </button>
+                <div class="header-details">
+                    <ul class="header-list">
+                        <partial name="_LinksLogin"/>
+                    </ul>
+
+                    <button class="switch-theme header-btn">
+                        <i class="bi bi-moon-stars"></i>
+                    </button>
+                </div>
             </div>
         </header>
 

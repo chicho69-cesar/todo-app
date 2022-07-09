@@ -7,7 +7,7 @@ namespace TodoApp.Services.Interfaces {
         Task<User> GetByEmailAsync(string email);
         Task<User> GetByIdAsync(int id);
         Task<User> GetByUserNameAsync(string username);
-        Task<User> GetUser(int id);
+        Task<User> GetUserAsync(int id);
         Task<IEnumerable<User>> GetUsersAsync();
         Task UpdateUserAsync(User user);
     }

@@ -13,17 +13,23 @@ namespace TodoApp.Controllers {
         private readonly UserManager<UserDTO> _userManager;
         private readonly SignInManager<UserDTO> _signInManager;
         private readonly IBlobService _blobService;
+        private readonly IUserService _userService;
+        private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
 
         public UsersController(
             UserManager<UserDTO> userManager,
             SignInManager<UserDTO> signInManager,
             IBlobService blobService,
+            IUserService userService,
+            IUserRepository userRepository,
             IMapper mapper
         ) {
             _userManager = userManager;
             _signInManager = signInManager;
             _blobService = blobService;
+            _userService = userService;
+            _userRepository = userRepository;
             _mapper = mapper;
         }
 
@@ -98,6 +104,15 @@ namespace TodoApp.Controllers {
 
                 return View(model);
             }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Details() {
+            var userId = _userService.GetUserById();
+            var user = await _userRepository.GetUserAsync(userId);
+            var model = _mapper.Map<UserDetailsViewModel>(user);
+
+            return View(model);
         }
     }
 }

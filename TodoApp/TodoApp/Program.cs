@@ -41,10 +41,11 @@ builder.Services.AddAuthentication(options => {
 });
 
 builder.Services.AddScoped<IUserStore<UserDTO>, StoreUser>();
-builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IBlobService, BlobService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<SignInManager<UserDTO>>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IUserGroupsRepository, UserGroupsRepository>();
 builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();

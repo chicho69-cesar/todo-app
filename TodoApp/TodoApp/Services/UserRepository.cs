@@ -15,9 +15,13 @@ namespace TodoApp.Services {
                 .ToListAsync();
         }
 
-        public async Task<User> GetUser(int id) {
+        public async Task<User> GetUserAsync(int id) {
             return await _context.Users
                 .Where(u => u.Id == id)
+                .Include(u => u.Notes)
+                .Include(u => u.UserGroups)
+                .ThenInclude(ug => ug.Group)
+                .ThenInclude(g => g.TaskWorks)
                 .FirstOrDefaultAsync();
         }
 

@@ -1,0 +1,51 @@
+﻿@model UserDetailsViewModel
+
+@{
+    ViewData["Title"] = "" + Model.FullName;
+}
+
+<link rel="stylesheet" href="~/css/users/details.css" asp-append-version="true" />
+
+<section class="main-container">
+    <article class="main-row">
+        <div class="main-column">
+            <img class="main-image" src="@Model.ImageFullPath" alt="@Model.FirstName"/>
+            <a class="main-edit main-edit-1" asp-action="EditImage" asp-controller="Users">
+                I
+                <!-- Aqui va a ir un icono de lapiz -->
+            </a>
+        </div>
+        
+        <div class="main-column">
+            <div class="main-description">
+                <p class="main-title">@Model.FullName</p>
+                <p class="main-title">@Model.Email</p>
+                <p class="main-title">@Model.UserName</p>
+            </div>
+
+            <a class="main-edit" asp-action="EditInfo" asp-controller="Users">
+                I
+                <!-- Aqui va a ir un icono de lapiz -->
+            </a>
+        </div>
+    </article>
+
+    <hr/>
+    
+    <article class="main-row">
+        <div class="main-column">
+            <h3 class="main-info">N° de notas: </h3>
+            <p class="main-quantity">@Model.NotesNumber</p>
+        </div>
+
+        <div class="main-column">
+            <h3 class="main-info">Grupos: </h3>
+            <p class="main-quantity">@Model.GroupsNumber</p>
+        </div>
+
+        <div class="main-column">
+            <h3 class="main-info">Tareas: </h3>
+            <p class="main-quantity">@Model.TasksNumbers</p>
+        </div>
+    </article>
+</section>
