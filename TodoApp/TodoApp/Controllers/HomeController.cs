@@ -16,6 +16,18 @@ namespace TodoApp.Controllers {
             return View();
         }
 
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult NotAuthorized() {
+            return View();
+        }
+
+        [Route("error/404")]
+        [AllowAnonymous]
+        public IActionResult Error404() {
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error() {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });

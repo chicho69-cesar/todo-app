@@ -10,20 +10,17 @@ using TodoApp.Services.Interfaces;
 
 namespace TodoApp.Controllers {
     public class UsersController : Controller {
-        private readonly TodoAppContext _context;
         private readonly UserManager<UserDTO> _userManager;
         private readonly SignInManager<UserDTO> _signInManager;
         private readonly IBlobService _blobService;
         private readonly IMapper _mapper;
 
         public UsersController(
-            TodoAppContext context,
             UserManager<UserDTO> userManager,
             SignInManager<UserDTO> signInManager,
             IBlobService blobService,
             IMapper mapper
         ) {
-            _context = context;
             _userManager = userManager;
             _signInManager = signInManager;
             _blobService = blobService;
@@ -72,6 +69,7 @@ namespace TodoApp.Controllers {
 
         [HttpPost]
         [AllowAnonymous]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterViewModel model) {
             if (!ModelState.IsValid) {
                 return View(model);
@@ -100,18 +98,6 @@ namespace TodoApp.Controllers {
 
                 return View(model);
             }
-        }
-
-        [HttpGet]
-        [AllowAnonymous]
-        public IActionResult NotAuthorized() {
-            return View();
-        }
-
-        [Route("error/404")]
-        [AllowAnonymous]
-        public IActionResult Error404() {
-            return View();
         }
     }
 }
