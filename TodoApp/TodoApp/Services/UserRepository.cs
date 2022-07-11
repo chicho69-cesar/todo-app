@@ -42,10 +42,7 @@ namespace TodoApp.Services {
 
             updatedUser.FirstName = user.FirstName;
             updatedUser.LastName = user.LastName;
-            updatedUser.Email = user.Email;
-            updatedUser.UserName = user.UserName;
             updatedUser.ImageId = user.ImageId;
-            updatedUser.PasswordHash = user.PasswordHash;
 
             _context.Entry(updatedUser).State = EntityState.Modified;
             await _context.SaveChangesAsync();

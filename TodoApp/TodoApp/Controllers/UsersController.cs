@@ -114,5 +114,42 @@ namespace TodoApp.Controllers {
 
             return View(model);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> EditInfo() {
+            var userId = _userService.GetUserById();
+            var user = await _userRepository.GetUserAsync(userId);
+            var model = _mapper.Map<EditInfoViewModel>(user);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditInfo(EditInfoViewModel model) {
+            if (!ModelState.IsValid) {
+                return View(model);
+            }
+            
+            var userId = _userService.GetUserById();
+            var user = await _userRepository.GetUserAsync(userId);
+
+            if (user.ImageId != Guid.Empty) {
+                await _blobService.DeleteBlobAsync(user.ImageId ?? Guid.Empty, "users");
+            }
+
+            Guid imageId = Guid.Empty;
+
+            if (model.ImageFile != null) {
+                imageId = await _blobService.UploadBlobAsync(model.ImageFile, "users");
+            }
+
+            user.FirstName = model.FirstName;
+            user.LastName = model.LastName;
+            user.ImageId = imageId;
+
+            await _userRepository.UpdateUserAsync(user);
+
+            return RedirectToAction(nameof(Details));
+        }
     }
 }

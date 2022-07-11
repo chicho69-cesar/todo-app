@@ -24,7 +24,7 @@ namespace TodoApp.Models {
         public string LastName { get; set; }
 
         [Display(Name = "Foto")]
-        public Guid ImageId { get; set; }
+        public Guid? ImageId { get; set; }
 
         public ICollection<NoteDTO> Notes { get; set; }
 
@@ -33,7 +33,7 @@ namespace TodoApp.Models {
         //TODO: Cambiar la ruta para el despliegue
         [Display(Name = "Foto")]
         public string ImageFullPath => ImageId == Guid.Empty
-            ? $"https://localhost:7193/images/cesar.jpg"
+            ? $"https://localhost:7193/images/noimage.png"
             : $"https://todolistapp.blob.core.windows.net/users/{ImageId}";
 
         [Display(Name = "Usuario")]

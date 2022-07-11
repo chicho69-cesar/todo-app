@@ -1,0 +1,27 @@
+﻿@model EditInfoViewModel
+
+<section class="controls">
+    <div class="form-group">
+        <div class="label-group">
+            <label asp-for="FirstName" class="form-label"></label>
+            <span class="required">*</span>
+        </div>
+
+        <input asp-for="FirstName" class="form-input" placeholder="jhon@gmail.com"/>
+        <span asp-validation-for="FirstName" class="error"></span>
+    </div>
+
+    <div class="form-group">
+        <div class="label-group">
+            <label asp-for="LastName" class="form-label"></label>
+            <span class="required">*</span>
+        </div>
+
+        <input asp-for="LastName" class="form-input" placeholder="jhon@gmail.com"/>
+        <span asp-validation-for="LastName" class="error"></span>
+    </div>
+
+    <div class="image-container">
+        <img src="@Model.ImageFullPath" alt="@Model.FullName" class="edit-image"/>
+    </div>
+</section>

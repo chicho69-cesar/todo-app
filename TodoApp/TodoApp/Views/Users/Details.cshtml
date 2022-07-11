@@ -10,9 +10,8 @@
     <article class="main-row">
         <div class="main-column">
             <img class="main-image" src="@Model.ImageFullPath" alt="@Model.FirstName"/>
-            <a class="main-edit main-edit-1" asp-action="EditImage" asp-controller="Users">
-                I
-                <!-- Aqui va a ir un icono de lapiz -->
+            <a class="main-edit main-edit-1" asp-action="EditInfo" asp-controller="Users">
+                <i class="bi bi-pencil"></i>
             </a>
         </div>
         
@@ -22,11 +21,6 @@
                 <p class="main-title">@Model.Email</p>
                 <p class="main-title">@Model.UserName</p>
             </div>
-
-            <a class="main-edit" asp-action="EditInfo" asp-controller="Users">
-                I
-                <!-- Aqui va a ir un icono de lapiz -->
-            </a>
         </div>
     </article>
 

@@ -1,0 +1,38 @@
+﻿@model EditInfoViewModel
+
+@{
+    ViewData["Title"] = "" + Model.FullName;
+}
+
+<link rel="stylesheet" href="~/css/users/users.css" asp-append-version="true" />
+
+<section class="main">
+    <form asp-action="EditInfo" enctype="multipart/form-data" class="form">
+        <div asp-validation-summary="ModelOnly" class="error"></div>
+
+        <partial name="_EditInfo" model="Model"/>
+
+        <div class="buttons">
+            <label asp-for="ImageFile" class="label-image btn">
+                <i class="bi bi-card-image"></i>
+            </label>
+
+            <input asp-for="ImageFile" class="form-image"/>
+            <span asp-validation-for="ImageFile" class="error"></span>
+
+            <button type="submit" value="EditInfo" class="btn">
+                ¡Listo!
+            </button>
+        </div>
+    </form>
+</section>
+
+<style>
+    main {
+        margin: 2rem auto;
+    }
+</style>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

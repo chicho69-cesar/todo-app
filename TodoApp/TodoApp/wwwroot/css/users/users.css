@@ -49,7 +49,7 @@ main {
 }
 
 .form-label {
-    font-size: 1.125rem;
+    font-size: 0.9rem;
     color: var(--secondaryColor);
 }
 
@@ -110,4 +110,21 @@ main {
 
 .form-text {
     color: var(--secondaryColor);
+}
+
+.image-container {
+    width: 100%;
+    //margin: 0rem 0;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.edit-image {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: left;
 }
