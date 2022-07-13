@@ -1,9 +1,19 @@
-﻿@{
+﻿@model GroupsNotesViewModel
+
+@{
     ViewData["Title"] = "Inicio";
 }
 
-<h1>Hello World!!!</h1>
+<link rel="stylesheet" href="~/css/home/home.css" asp-append-version="true"/>
 
-@section Scripts {
+<section class="main">
+    <partial name="_NavItems" model="@Model.Charge"/>
 
-}
+    <div class="container">
+        @if (Model.Charge == "Notes") {
+            <partial name="_Notes" model="@Model.Notes"/>
+        } else {
+            <partial name="_Groups"/>
+        }
+    </div>
+</section>

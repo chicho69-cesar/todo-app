@@ -1,0 +1,60 @@
+﻿.container {
+    padding: 0;
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.note {
+    width: 100%;
+    padding: 1rem;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.note:nth-child(odd) {
+    background-color: var(--alternateColor);
+}
+
+.note-description {
+    width: 70%;
+}
+
+.note-details {
+    margin-bottom: 0.25rem;
+    font-size: 0.9rem;
+    color: var(--themeNote);
+}
+
+.note-text {
+    font-size: 1.2rem;
+}
+
+.note-actions {
+    width: 28%;
+    display: flex;
+    flex-flow: row nowrap;
+    gap: 0.75rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.action-btn {
+    display: inline-block;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 1.125rem;
+    color: #000;
+    box-shadow: var(--btnShadow);
+    transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.action-btn:hover {
+    box-shadow: none;
+    transform: translateY(-1.5px);
+}
+
+.action-btn-complete { background-color: aqua; }
+.action-btn-edit { background-color: #fab32e; }
+.action-btn-delete { background-color: #fd3939; }

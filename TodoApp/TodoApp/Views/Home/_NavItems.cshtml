@@ -1,0 +1,19 @@
+﻿@model string
+
+<ul class="tabs-nav">
+    <li class="tabs-item">
+        <a class="tabs-link @(Model == "Notes" ? "tabs-active" : null)" 
+        asp-action="Index" asp-controller="Home" asp-route-charge="Notes">
+            <i class="bi bi-card-checklist"></i>    
+            Notas
+        </a>
+    </li>
+
+    <li class="tabs-item">
+        <a class="tabs-link @(Model == "Groups" ? "tabs-active" : null)" 
+        asp-action="Index" asp-controller="Home" asp-route-charge="Groups">
+            <i class="bi bi-people"></i>
+            Grupos
+        </a>
+    </li>
+</ul>

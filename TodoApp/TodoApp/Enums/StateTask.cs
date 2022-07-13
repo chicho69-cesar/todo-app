@@ -1,8 +1,8 @@
 ﻿namespace TodoApp.Enums {
     public enum StateTask {
-        Activa,
-        Terminada,
-        Cancelada,
-        Eliminada
+        Activa = 0,
+        Terminada = 1,
+        Cancelada = 2,
+        Eliminada = 3
     }
 }

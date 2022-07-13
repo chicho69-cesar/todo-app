@@ -1,7 +1,7 @@
 ﻿namespace TodoApp.Enums {
     public enum StateInGroup {
-        NoPertenece,
-        Pendiente,
-        Activo
+        NoPertenece = 0,
+        Pendiente = 1,
+        Activo = 2
     }
 }

@@ -17,8 +17,10 @@
     --secondaryColor: #101010;
     --secondBackground: #fff;
     --thirdBackground: #fdfdfd;
+    --alternateColor: #f0f0f0;
     --hoverColor: #505050;
     --themeColor: linear-gradient(to bottom right, #593263, #77418f);
+    --themeNote: #77418f;
     --borderColor: #707070;
     --headerShadow: 5px 0 10px -5px rgba(10 10 10 / 25%);
     --buttonShadow: 0 0 15px -5px rgba(10 10 10 / 25%);
@@ -31,8 +33,10 @@
     --secondaryColor: #f0f0f0;
     --secondBackground: #151515;
     --thirdBackground: #151515;
+    --alternateColor: #171717;
     --hoverColor: #e1e1e1;
     --themeColor: linear-gradient(to bottom right, #fdc639, #ff7c60);
+    --themeNote: #ff7c60;
     --borderColor: #919191;
     --headerShadow: 5px 0 10px -5px rgba(125 125 125 / 25%);
     --buttonShadow: 0 0 15px -5px rgba(125 125 125 / 25%);

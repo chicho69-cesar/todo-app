@@ -35,6 +35,27 @@ main {
     flex-direction: column;
     flex-wrap: nowrap;
     gap: 1rem;
+    position: relative;
+}
+
+.return {
+    position: absolute;
+    right: 1.5rem;
+    top: 1.25rem;
+    width: 40px;
+    height: 40px;
+    border-radius: 40px;
+    line-height: 40px;
+    text-align: center;
+    font-size: 1.35rem;
+    background: var(--themeColor);
+    color: #fff;
+    box-shadow: var(--btnShadow);
+    transition: box-shadow 0.25s ease;
+}
+
+.return:hover {
+    box-shadow: none;
 }
 
 .controls {
@@ -114,7 +135,6 @@ main {
 
 .image-container {
     width: 100%;
-    //margin: 0rem 0;
     display: flex;
     flex-flow: row nowrap;
     justify-content: center;

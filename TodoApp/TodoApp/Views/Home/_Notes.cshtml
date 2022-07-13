@@ -1,0 +1,59 @@
+﻿@using TodoApp.Data
+@using TodoApp.Enums
+@model IEnumerable<Note>
+
+@{
+    StateTask getState(int state) => state switch {
+        0 => StateTask.Activa,
+        1 => StateTask.Terminada,
+        2 => StateTask.Cancelada,
+        3 => StateTask.Eliminada,
+        _ => StateTask.Activa
+    };
+
+    Func<StateTask, DateTime, string> functionDate = (StateTask state, DateTime date) => {
+        var day = date.ToString("dd");
+        var month = date.ToString("MM");
+        var year = date.ToString("yyyy");
+        var hour = date.ToString("hh:mm tt");
+        
+        return $"{day}/{month}/{year} a las {hour} - {state}";
+    };
+
+    var getDetails = functionDate;
+}
+
+<link rel="stylesheet" href="~/css/home/notes.css" asp-append-version="true"/>
+
+@foreach (var note in Model) {
+    <article class="note">
+        <div class="note-description">
+            <p class="note-details">@getDetails(getState(note.State), note.Date)</p>
+            <p class="note-text">@note.Text</p>
+        </div>
+
+        <div class="note-actions">
+            <a class="action-btn action-btn-complete" 
+            asp-action="Complete" asp-controller="" 
+            asp-route-noteId="@note.Id">
+                @if (note.State == 1) {
+                    <i class="bi bi-check2-square"></i>
+                } else {
+                    <i class="bi bi-square"></i>
+                }
+            </a>
+
+            <a class="action-btn action-btn-edit" 
+            asp-action="Edit" asp-controller="" 
+            asp-route-noteId="@note.Id">
+                <i class="bi bi-pencil"></i>
+            </a>
+
+            <a class="action-btn action-btn-delete" 
+            asp-action="Delete" asp-controller="" 
+            asp-route-noteId="@note.Id">
+                <i class="bi bi-trash"></i>
+            </a>
+        </div>
+    </article>
+}

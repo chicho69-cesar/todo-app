@@ -1,0 +1,54 @@
+﻿main {
+    width: 100%;
+    margin: 3rem 0;
+}
+
+.main {
+    width: 75%;
+    margin: 0 auto;
+}
+
+.tabs-nav {
+    width: 100%;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-flow: row nowrap;
+    gap: 1rem;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.tabs-item {
+    list-style: none;
+}
+
+.tabs-link {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    font-size: 1.125rem;
+    color: var(--secondaryColor);
+    background-color: var(--secondBackground);
+    box-shadow: var(--formShadow);
+    transition: transform 0.25s ease;
+}
+
+.tabs-active {
+    color: #fff;
+    background: var(--themeColor);
+}
+
+.tabs-link:hover {
+    box-shadow: none;
+    transform: translateY(-2.5px);
+}
+
+.container {
+    width: 100%;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    color: var(--secondaryColor);
+    background-color: var(--secondBackground);
+    box-shadow: var(--formShadow);
+}
