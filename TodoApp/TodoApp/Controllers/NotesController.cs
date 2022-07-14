@@ -37,5 +37,19 @@ namespace TodoApp.Controllers {
             return (await _notesRepository.Complete(note))
                 ? Ok() : BadRequest();
         }
+
+        [HttpDelete]
+        [Route("notes/delete/{id}")]
+        public async Task<IActionResult> Delete(int id) {
+            var userId = _userService.GetUserById();
+            var note = await _notesRepository.Get(id);
+
+            if (note is null || note.User.Id != userId) {
+                return BadRequest();
+            }
+
+            return (await _notesRepository.Delete(note))
+                ? Ok() : BadRequest();
+        }
     }
 }

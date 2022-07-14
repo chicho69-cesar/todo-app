@@ -20,13 +20,12 @@ namespace TodoApp.Services {
 
         public async Task<bool> Complete(Note note) {
             try {
-                var noteSearched = await SearchNote(note.Id);
-                noteSearched.State = (int)StateTask.Terminada;
+                var band = await Modified(
+                    await SearchNote(note.Id),
+                    (int)StateTask.Terminada
+                );
 
-                _context.Entry(noteSearched).State = EntityState.Modified;
-                await _context.SaveChangesAsync();
-
-                return true;
+                return band;
             } catch (Exception) {
                 return false;
             }
@@ -34,17 +33,41 @@ namespace TodoApp.Services {
 
         public async Task<bool> UnComplete(Note note) {
             try {
-                var noteSearched = await SearchNote(note.Id);
-                noteSearched.State = (int)StateTask.Activa;
+                var band = await Modified(
+                    await SearchNote(note.Id),
+                    (int)StateTask.Activa
+                );
 
-                _context.Entry(noteSearched).State = EntityState.Modified;
+                return band;
+            } catch (Exception) {
+                return false;
+            }
+        }
+
+        public async Task<bool> Delete(Note note) {
+            try {
+                var band = await Modified(
+                    await SearchNote(note.Id),
+                    (int)StateTask.Eliminada
+                );
+
+                return band;
+            } catch(Exception) {
+                return false;
+            }
+        }
+
+        public async Task<bool> Modified(Note note, int newState) {
+            try {
+                note.State = newState;
+                _context.Entry(note).State = EntityState.Modified;
                 await _context.SaveChangesAsync();
 
                 return true;
             } catch (Exception) {
                 return false;
             }
-        }
+        } 
 
         private async Task<Note> SearchNote(int id) {
             return await _context.Notes

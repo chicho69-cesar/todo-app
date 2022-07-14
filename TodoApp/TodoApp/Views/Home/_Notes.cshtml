@@ -21,9 +21,12 @@
     };
 
     var getDetails = functionDate;
+
+    string textModel = "";
 }
 
 <link rel="stylesheet" href="~/css/home/notes.css" asp-append-version="true"/>
+<link rel="stylesheet" href="~/css/home/modal.css" asp-append-version="true"/>
 
 @foreach (var note in Model) {
     <article class="note">
@@ -47,49 +50,14 @@
                 <i class="bi bi-pencil"></i>
             </a>
 
-            <a class="action-btn action-btn-delete" 
-            asp-action="Delete" asp-controller="" 
-            asp-route-noteId="@note.Id">
+            <a class="action-btn action-btn-delete @note.Id">
                 <i class="bi bi-trash"></i>
             </a>
         </div>
     </article>
 }
 
-<script>
-    let completeButtons = document.querySelectorAll('.action-btn-complete');
+<partial name="_Modal" model="textModel"/>
 
-    const API = 'https://localhost:7193/notes/complete';
-
-    const completeNote = async noteId => {
-        const request = `${API}/${noteId}`;
-        const options = {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-        };
-
-        try {
-            const response = await fetch(request, options);
-            return (response.status === 200);
-        } catch(error) {
-            return false;
-        }
-    }
-
-    completeButtons.forEach(btn => {
-        btn.addEventListener('click', async () => {
-            let noteId = (Number)(btn.classList[2]);
-            console.log(btn);
-            console.log(noteId);
-            let result = await completeNote(noteId);
-
-            if (result) {
-                location.reload();
-            } else {
-                console.error('ocurred an error while you marked as completed one task');
-            }
-        });
-    });
-</script>
+<script src="~/js/notes/complete.js"></script>
+<script src="~/js/notes/delete.js"></script>
