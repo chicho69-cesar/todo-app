@@ -41,11 +41,13 @@
 }
 
 .action-btn {
+    cursor: pointer;
     display: inline-block;
     padding: 0.5rem;
+    border: none;
     border-radius: 0.25rem;
     font-size: 1.125rem;
-    color: #000;
+    color: #151515;
     box-shadow: var(--btnShadow);
     transition: box-shadow 0.25s ease, transform 0.25s ease;
 }

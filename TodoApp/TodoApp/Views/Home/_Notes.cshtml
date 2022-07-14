@@ -12,10 +12,10 @@
     };
 
     Func<StateTask, DateTime, string> functionDate = (StateTask state, DateTime date) => {
-        var day = date.ToString("dd");
-        var month = date.ToString("MM");
-        var year = date.ToString("yyyy");
-        var hour = date.ToString("hh:mm tt");
+        string day = date.ToString("dd");
+        string month = date.ToString("MM");
+        string year = date.ToString("yyyy");
+        string hour = date.ToString("hh:mm tt");
         
         return $"{day}/{month}/{year} a las {hour} - {state}";
     };
@@ -33,9 +33,7 @@
         </div>
 
         <div class="note-actions">
-            <a class="action-btn action-btn-complete" 
-            asp-action="Complete" asp-controller="" 
-            asp-route-noteId="@note.Id">
+            <a class="action-btn action-btn-complete @note.Id">
                 @if (note.State == 1) {
                     <i class="bi bi-check2-square"></i>
                 } else {
@@ -57,3 +55,41 @@
         </div>
     </article>
 }
+
+<script>
+    let completeButtons = document.querySelectorAll('.action-btn-complete');
+
+    const API = 'https://localhost:7193/notes/complete';
+
+    const completeNote = async noteId => {
+        const request = `${API}/${noteId}`;
+        const options = {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        };
+
+        try {
+            const response = await fetch(request, options);
+            return (response.status === 200);
+        } catch(error) {
+            return false;
+        }
+    }
+
+    completeButtons.forEach(btn => {
+        btn.addEventListener('click', async () => {
+            let noteId = (Number)(btn.classList[2]);
+            console.log(btn);
+            console.log(noteId);
+            let result = await completeNote(noteId);
+
+            if (result) {
+                location.reload();
+            } else {
+                console.error('ocurred an error while you marked as completed one task');
+            }
+        });
+    });
+</script>

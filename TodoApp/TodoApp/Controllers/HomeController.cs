@@ -30,7 +30,7 @@ namespace TodoApp.Controllers {
 
             var model = new GroupsNotesViewModel {
                 Charge = charge,
-                Notes = user.Notes,
+                Notes = user.Notes.OrderBy(n => n.State),
                 UserGroups = user.UserGroups,
                 Groups = await _groupsRepository.GetGroups(userId)
             };
