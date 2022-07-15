@@ -64,6 +64,7 @@
     border-radius: 0.25rem;
     font-weight: bold;
     box-shadow: var(--btnShadow);
+    color: #151515;
     transition: box-shadow 0.25s ease, transform 0.25s ease;
 }
 

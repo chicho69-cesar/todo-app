@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using TodoApp.Controllers;
 using TodoApp.Data;
 using TodoApp.Helpers;
+using TodoApp.Helpers.Interfaces;
 using TodoApp.Models.DTOs;
 using TodoApp.Services;
 using TodoApp.Services.Interfaces;
@@ -44,6 +45,7 @@ builder.Services.AddAuthentication(options => {
 builder.Services.AddScoped<IUserStore<UserDTO>, StoreUser>();
 builder.Services.AddScoped<IBlobService, BlobService>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<ISelectListHelper, SelectListHelper>();
 builder.Services.AddScoped<SignInManager<UserDTO>>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserGroupsRepository, UserGroupsRepository>();
