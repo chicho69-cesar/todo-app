@@ -32,7 +32,8 @@ namespace TodoApp.Controllers {
                 Charge = charge,
                 Notes = user.Notes
                     .Where(n => n.State != 3)
-                    .OrderBy(n => n.State),
+                    .OrderBy(n => n.State)
+                    .ThenByDescending(n => n.Date),
                 UserGroups = user.UserGroups,
                 Groups = await _groupsRepository.GetGroups(userId)
             };

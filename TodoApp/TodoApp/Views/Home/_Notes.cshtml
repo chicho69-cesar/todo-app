@@ -32,7 +32,7 @@
     <article class="note">
         <div class="note-description">
             <p class="note-details">@getDetails(getState(note.State), note.Date)</p>
-            <p class="note-text">@note.Text</p>
+            <p class="note-text @(note.State == 2 ? "note-canceled" : null)">@note.Text</p>
         </div>
 
         <div class="note-actions">

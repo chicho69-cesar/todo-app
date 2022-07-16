@@ -65,6 +65,8 @@
     outline: none;
     border: 1px solid var(--borderColor);
     border-radius: 0.25rem;
+    background-color: var(--secondBackground);
+    color: var(--secondaryColor);
     font-size: 1.25rem;
     font-family: inherit;
 }

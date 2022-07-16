@@ -60,3 +60,7 @@
 .action-btn-complete { background-color: aqua; }
 .action-btn-edit { background-color: #fab32e; }
 .action-btn-delete { background-color: #fd3939; }
+
+.note-canceled {
+    text-decoration: line-through;
+}
