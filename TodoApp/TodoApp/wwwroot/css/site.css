@@ -50,6 +50,16 @@ body {
     background-color: var(--mainColor);
 }
 
+body::-webkit-scrollbar { 
+    width: 7px;
+    background: transparent;
+}
+
+body::-webkit-scrollbar-thumb { 
+    background: #101010;
+    border-radius: 5px;
+}
+
 header {
     width: 100%;
     padding: 0.75rem 0;
@@ -139,16 +149,6 @@ header {
 
 .user-details:hover {
     color: var(--hoverColor);
-}
-
-body::-webkit-scrollbar { 
-    width: 7px;
-    background: transparent;
-}
-
-body::-webkit-scrollbar-thumb { 
-    background: #101010;
-    border-radius: 5px;
 }
 
 .required {
