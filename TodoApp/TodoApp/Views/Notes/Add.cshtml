@@ -1,0 +1,35 @@
+﻿@model AddNoteViewModel
+
+@{
+    ViewData["Title"] = "Agrega una nota";
+}
+
+<link rel="stylesheet" href="~/css/notes/general-notes.css" asp-append-version="true"/>
+<link rel="stylesheet" href="~/css/notes/add.css" asp-append-version="true"/>
+
+<section class="container">
+    <form asp-action="Add" asp-controller="Notes" 
+    enctype="multipart/form-data" class="form">
+        <div asp-validation-summary="ModelOnly" class="error"></div>
+        
+        <h3 class="add-title">Agrega una nota</h3>
+
+        <div class="group">
+            <label asp-for="Text" class="label"></label>
+            <textarea asp-for="Text" class="input" placeholder="Escribe una nota..."></textarea>
+            <span asp-validation-for="Text" class="error"></span>
+        </div>
+
+        <div class="buttons">
+            <button type="submit" value="Add" class="btn ok">
+                <i class="bi bi-plus-lg"></i>  
+                Agregar
+            </button>
+
+            <a asp-action="Index" asp-controller="Home" class="btn cancel">
+                <i class="bi bi-x-lg"></i> 
+                Cancelar
+            </a>
+        </div>
+    </form>
+</section>

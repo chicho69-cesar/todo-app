@@ -18,6 +18,16 @@ namespace TodoApp.Services {
                 .FirstOrDefaultAsync();
         }
 
+        public async Task<bool> Add(Note note) {
+            try {
+                await _context.Notes.AddAsync(note);
+                await _context.SaveChangesAsync();
+                return true;
+            } catch(Exception) {
+                return false;
+            }
+        }
+
         public async Task<bool> Edit(Note note) {
             try {
                 var searchedNote = await SearchNote(note.Id);

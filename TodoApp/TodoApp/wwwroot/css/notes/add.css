@@ -1,0 +1,7 @@
+﻿.add-title {
+    width: 100%;
+    font-size: 1.75rem;
+    text-align: center;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: var(--secondaryColor);
+}

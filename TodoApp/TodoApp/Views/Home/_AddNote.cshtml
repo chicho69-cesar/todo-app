@@ -1,0 +1,13 @@
+﻿@model string
+
+<div class="add-container">
+    <h3 class="add-title">Notas de @Model</h3>
+    
+    <div class="add-group">
+        <p class="add-text">¿Deseas agregar una nota?</p>
+        <a asp-action="Add" asp-controller="Notes" class="add-link">
+            <i class="bi bi-plus-lg"></i> 
+            Agregar
+        </a>
+    </div>
+</div>

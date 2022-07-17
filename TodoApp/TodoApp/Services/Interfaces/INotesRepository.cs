@@ -2,6 +2,7 @@
 
 namespace TodoApp.Services.Interfaces {
     public interface INotesRepository {
+        Task<bool> Add(Note note);
         Task<bool> Complete(Note note);
         Task<bool> Delete(Note note);
         Task<bool> Edit(Note note);

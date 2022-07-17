@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Inicio";
+    string user = ViewBag.User;
 }
 
 <link rel="stylesheet" href="~/css/home/home.css" asp-append-version="true"/>
@@ -11,6 +12,7 @@
 
     <div class="container">
         @if (Model.Charge == "Notes") {
+            <partial name="_AddNote" model="user"/>
             <partial name="_Notes" model="@Model.Notes"/>
         } else {
             <partial name="_Groups"/>

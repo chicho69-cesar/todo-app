@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using TodoApp.Data;
 using TodoApp.Helpers.Interfaces;
 using TodoApp.Models;
 using TodoApp.Services.Interfaces;
@@ -8,20 +9,56 @@ namespace TodoApp.Controllers {
         private readonly INotesRepository _notesRepository;
         private readonly IUserService _userService;
         private readonly ISelectListHelper _selectListHelper;
+        private readonly IUserRepository _userRepository;
 
         public NotesController(
             INotesRepository notesRepository,
             IUserService userService,
-            ISelectListHelper selectListHelper
+            ISelectListHelper selectListHelper,
+            IUserRepository userRepository
         ) {
             _notesRepository = notesRepository;
             _userService = userService;
             _selectListHelper = selectListHelper;
+            _userRepository = userRepository;
         }
 
         [HttpGet]
         public IActionResult Index() {
             return View();
+        }
+
+        [HttpGet]
+        public IActionResult Add() {
+            return View(new AddNoteViewModel());
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Add(AddNoteViewModel model) {
+            if (!ModelState.IsValid) {
+                ModelState.AddModelError(string.Empty, "Ocurrio un error al agregar la nota");
+                return View(model);
+            }
+
+            var userId = _userService.GetUserById();
+            var user = await _userRepository.GetUserAsync(userId);
+
+            var note = new Note {
+                Text = model.Text,
+                Date = DateTime.Now,
+                State = 0,
+                UserId = userId,
+                User = user
+            };
+
+            bool band = await _notesRepository.Add(note);
+
+            if (band) {
+                return RedirectToAction("Index", "Home");
+            } else {
+                ModelState.AddModelError(string.Empty, "Ocurrio un error al agregar la nota");
+                return View(model);
+            }
         }
 
         [HttpGet]

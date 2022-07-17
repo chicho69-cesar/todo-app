@@ -38,6 +38,8 @@ namespace TodoApp.Controllers {
                 Groups = await _groupsRepository.GetGroups(userId)
             };
 
+            ViewBag.User = user.UserName;
+
             return View(model);
         }
 

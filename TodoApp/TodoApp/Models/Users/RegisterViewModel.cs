@@ -6,6 +6,7 @@ namespace TodoApp.Models {
         [EmailAddress(ErrorMessage = "Debes ingresar un correo válido.")]
         [MaxLength(100, ErrorMessage = "El campo {0} debe tener máximo {1} caractéres.")]
         [Required(ErrorMessage = "El campo {0} es obligatorio.")]
+        // [RegularExpression("^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", ErrorMessage = "Escribe una direccion de correo valida")]
         public string Email { get; set; }
 
         [Display(Name = "Username")]
