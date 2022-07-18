@@ -2,7 +2,6 @@
     public enum StateTask {
         Activa = 0,
         Terminada = 1,
-        Cancelada = 2,
-        Eliminada = 3
+        Cancelada = 2
     }
 }

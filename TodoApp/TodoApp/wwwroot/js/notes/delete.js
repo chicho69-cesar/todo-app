@@ -41,7 +41,12 @@ confirmDelete.addEventListener('click', async () => {
     let result = await deleteNote(noteId);
 
     if (result) {
-        location.reload();
+        let deleteNotes = document.querySelectorAll('.note');
+        for (const deleteNote of deleteNotes) {
+            if ((Number)(deleteNote.classList[1]) === noteId) {
+                deleteNote.remove();
+            }
+        }
     } else {
         console.error('ocurred an error while you marked as deleted this task');
     }

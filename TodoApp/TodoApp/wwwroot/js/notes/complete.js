@@ -22,7 +22,6 @@ const completeNote = async noteId => {
 completeButtons.forEach(btn => {
     btn.addEventListener('click', async () => {
         let noteId = (Number)(btn.classList[2]);
-        console.log(noteId);
         let result = await completeNote(noteId);
 
         if (result) {

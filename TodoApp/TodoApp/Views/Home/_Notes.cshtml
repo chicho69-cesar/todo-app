@@ -7,7 +7,6 @@
         0 => StateTask.Activa,
         1 => StateTask.Terminada,
         2 => StateTask.Cancelada,
-        3 => StateTask.Eliminada,
         _ => StateTask.Activa
     };
 
@@ -29,7 +28,7 @@
 <link rel="stylesheet" href="~/css/home/modal.css" asp-append-version="true"/>
 
 @foreach (var note in Model) {
-    <article class="note">
+    <article class="note @note.Id">
         <div class="note-description">
             <p class="note-details">@getDetails(getState(note.State), note.Date)</p>
             <p class="note-text @(note.State == 2 ? "note-canceled" : null)">@note.Text</p>

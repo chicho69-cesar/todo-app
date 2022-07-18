@@ -77,12 +77,11 @@ namespace TodoApp.Services {
 
         public async Task<bool> Delete(Note note) {
             try {
-                var band = await Modified(
-                    await SearchNote(note.Id),
-                    (int)StateTask.Eliminada
-                );
+                var searchedNote = await SearchNote(note.Id);
+                _context.Notes.Remove(searchedNote);
+                await _context.SaveChangesAsync();
 
-                return band;
+                return true;
             } catch(Exception) {
                 return false;
             }
