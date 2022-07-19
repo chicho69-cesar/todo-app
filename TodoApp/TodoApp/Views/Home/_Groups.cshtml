@@ -1,1 +1,43 @@
-﻿<h1>Grupos</h1>
+﻿@using TodoApp.Models.DTOs
+@model IEnumerable<GroupDTO>
+
+@{
+    Func<GroupDTO, int> func = (GroupDTO g) => {
+        return g.TaskWorks.Count;
+    };
+
+    var NumberOfTasks = func;
+}
+
+@foreach (var group in Model) {
+    <a class="group-detail" 
+    asp-action="Details" asp-controller="Groups" 
+    asp-route-groupId="@group.Id">
+        <article class="group @group.Id">
+            <div class="group-image">
+                <img src="@group.ImageFullPath" alt="@group.Name" class="group-image"/>
+            </div>
+
+            <div class="group-details">
+                <p class="group-code">
+                    #@group.Id - @NumberOfTasks(group) Tarea@(NumberOfTasks(group) > 1 ? "s" : null)
+                </p>
+                <h3 class="group-name">@group.Name</h3>
+            </div>
+
+            <div class="group-actions">
+                <a class="action-btn action-btn-edit" 
+                asp-action="Edit" asp-controller="Groups" 
+                asp-route-groupId="@group.Id">
+                    <i class="bi bi-pencil"></i>
+                </a>
+
+                <a class="action-btn action-btn-delete @group.Id"
+                asp-action="Exit" asp-controller="Groups" 
+                asp-route-groupId="@group.Id">
+                    <i class="bi bi-box-arrow-left"></i>
+                </a>
+            </div>
+        </article>
+    </a>
+}

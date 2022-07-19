@@ -4,4 +4,20 @@
     ViewData["Title"] = "No tienes permiso de acceso";
 }
 
-<h1>No estas autorizado para hacer esto</h1>
+<link rel="stylesheet" href="~/css/home/error.css" asp-append-version="true"/>
+
+<section class="container">
+    <h3 class="error-title">
+        No estas autorizado para realizar esta acción
+    </h3>
+
+    <img class="error-img notauthorize-img" 
+    src="~/images/forbiden.png" 
+    alt="No autorizado"/>
+</section>
+
+<style>
+    .notauthorize-img {
+        filter: drop-shadow(5px 5px 15px #139dff80);
+    }
+</style>

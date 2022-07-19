@@ -1,4 +1,5 @@
 ﻿using TodoApp.Data;
+using TodoApp.Models.DTOs;
 
 namespace TodoApp.Models {
     public class GroupsNotesViewModel {
@@ -6,7 +7,7 @@ namespace TodoApp.Models {
 
         public IEnumerable<Note> Notes { get; set; }
         
-        public IEnumerable<Group> Groups { get; set; }
+        public IEnumerable<GroupDTO> Groups { get; set; }
         
         public IEnumerable<UserGroup> UserGroups { get; set; }
     }

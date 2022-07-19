@@ -15,7 +15,8 @@
             <partial name="_AddNote" model="user"/>
             <partial name="_Notes" model="@Model.Notes"/>
         } else {
-            <partial name="_Groups"/>
+            <partial name="_HeaderGroups" model="user"/>
+            <partial name="_Groups" model="@Model.Groups"/>
         }
     </div>
 </section>
