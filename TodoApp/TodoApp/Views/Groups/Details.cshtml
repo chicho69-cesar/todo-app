@@ -1,0 +1,13 @@
+﻿@model GroupTasksViewModel
+
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<section class="container">
+    @foreach(var task in Model.Tasks) {
+        <p>
+            @task.Text
+        </p>
+    }
+</section>

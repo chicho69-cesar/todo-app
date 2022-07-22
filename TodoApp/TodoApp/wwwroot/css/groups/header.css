@@ -1,0 +1,60 @@
+﻿.container-header {
+    width: 100%;
+}
+
+.groups-title {
+    width: 100%;
+    padding: 1rem;
+    font-size: 2rem;
+    font-family: 'Segoe UI', system-ui, Verdana, sans-serif;
+    text-align: center;
+}
+
+.group-container,
+.group-column {
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    gap: 1rem;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.group-container {
+    padding: 0.5rem 1rem;
+}
+
+.group-column {
+    margin-bottom: 1rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.group-column-title {
+    font-size: 1.25rem;
+    font-family: 'Segoe UI', system-ui, Verdana, sans-serif;
+}
+
+.group-button {
+    display: inline-block;
+    padding: 0.5rem 2rem;
+    border-radius: 0.35rem;
+    text-decoration: none;
+    color: var(--secondaryColor);
+    font-size: 1.25rem;
+    box-shadow: var(--btnShadow);
+    transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.group-button.btn-create {
+    background: linear-gradient(to bottom right, #02e74e, #02ad3b);
+}
+
+.group-button.btn-enter {
+    background: linear-gradient(to bottom right, #f3bc08, #f3bc08);
+}
+
+.group-button:hover {
+    box-shadow: none;
+    transform: translateY(-1.25px);
+}

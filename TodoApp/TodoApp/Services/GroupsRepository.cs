@@ -21,5 +21,14 @@ namespace TodoApp.Services {
 
             return groups;
         }
+
+        public async Task<Group> GetGroup(int groupId) {
+            return await _contex.Groups
+                .Where(g => g.Id == groupId)
+                .Include(g => g.TaskWorks)
+                .Include(g => g.UserGroups)
+                .ThenInclude(ug => ug.User)
+                .FirstOrDefaultAsync();
+        }
     }
 }

@@ -22,6 +22,7 @@
     --themeColor: linear-gradient(to bottom right, #593263, #77418f);
     --themeNote: #77418f;
     --borderColor: #707070;
+    --codeGroup: #505050;
     --headerShadow: 5px 0 10px -5px rgba(10 10 10 / 25%);
     --buttonShadow: 0 0 15px -5px rgba(10 10 10 / 25%);
     --formShadow: 0 0 30px -15px rgba(0 0 0 / 50%);
@@ -38,6 +39,7 @@
     --themeColor: linear-gradient(to bottom right, #fdc639, #ff7c60);
     --themeNote: #ff7c60;
     --borderColor: #919191;
+    --codeGroup: #c1c1c1;
     --headerShadow: 5px 0 10px -5px rgba(125 125 125 / 25%);
     --buttonShadow: 0 0 15px -5px rgba(125 125 125 / 25%);
     --formShadow: 0 0 30px -15px rgba(0 0 0 / 50%);

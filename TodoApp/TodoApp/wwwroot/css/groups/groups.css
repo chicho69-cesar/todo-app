@@ -1,0 +1,80 @@
+﻿.container {
+    padding: 0;
+}
+
+.group {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.group:nth-child(even) {
+    background-color: var(--alternateColor);
+}
+
+.group-detail {
+    width: 100%;
+    padding: 1rem;
+    text-decoration: none;
+    display: flex;
+    flex-flow: row nowrap;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.group-img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.group-details {
+    width: 100%;
+}
+
+.group-code {
+    margin: 0;
+    font-size: 1.5rem;
+    color: var(--codeGroup);
+}
+
+.group-name {
+    font-size: 1.25rem;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: var(--secondaryColor);
+}
+
+.group-actions {
+    width: 25%;
+    display: flex;
+    flex-flow: row nowrap;
+    gap: 0.75rem;
+    justify-content: center;
+    align-items: center;;
+}
+
+.action-btn {
+    cursor: pointer;
+    display: inline-block;
+    padding: 0.5rem;
+    border: none;
+    border-radius: 0.25rem;
+    font-size: 1.125rem;
+    color: #151515;
+    box-shadow: var(--btnShadow);
+    transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.action-btn:hover {
+    box-shadow: none;
+    transform: translateY(-1.5px);
+}
+
+.action-btn-edit { background-color: #fab32e; }
+.action-btn-delete { background-color: #fd3939; }

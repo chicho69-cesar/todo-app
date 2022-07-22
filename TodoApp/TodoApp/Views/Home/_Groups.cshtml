@@ -9,13 +9,15 @@
     var NumberOfTasks = func;
 }
 
+<link rel="stylesheet" href="~/css/groups/groups.css" asp-append-version="true"/>
+
 @foreach (var group in Model) {
-    <a class="group-detail" 
-    asp-action="Details" asp-controller="Groups" 
-    asp-route-groupId="@group.Id">
-        <article class="group @group.Id">
+    <article class="group @group.Id">
+        <a class="group-detail" 
+        asp-action="Details" asp-controller="Groups" 
+        asp-route-groupId="@group.Id">
             <div class="group-image">
-                <img src="@group.ImageFullPath" alt="@group.Name" class="group-image"/>
+                <img src="@group.ImageFullPath" alt="@group.Name" class="group-img"/>
             </div>
 
             <div class="group-details">
@@ -24,20 +26,20 @@
                 </p>
                 <h3 class="group-name">@group.Name</h3>
             </div>
+        </a>
 
-            <div class="group-actions">
-                <a class="action-btn action-btn-edit" 
-                asp-action="Edit" asp-controller="Groups" 
-                asp-route-groupId="@group.Id">
-                    <i class="bi bi-pencil"></i>
-                </a>
+        <div class="group-actions">
+            <a class="action-btn action-btn-edit" 
+            asp-action="Edit" asp-controller="Groups" 
+            asp-route-groupId="@group.Id">
+                <i class="bi bi-pencil"></i>
+            </a>
 
-                <a class="action-btn action-btn-delete @group.Id"
-                asp-action="Exit" asp-controller="Groups" 
-                asp-route-groupId="@group.Id">
-                    <i class="bi bi-box-arrow-left"></i>
-                </a>
-            </div>
-        </article>
-    </a>
+            <a class="action-btn action-btn-delete @group.Id"
+            asp-action="Exit" asp-controller="Groups" 
+            asp-route-groupId="@group.Id">
+                <i class="bi bi-box-arrow-left"></i>
+            </a>
+        </div>
+    </article>
 }

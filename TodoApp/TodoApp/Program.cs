@@ -51,6 +51,7 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserGroupsRepository, UserGroupsRepository>();
 builder.Services.AddScoped<IGroupsRepository, GroupsRepository>();
 builder.Services.AddScoped<INotesRepository, NotesRepository>();
+builder.Services.AddScoped<ITasksRepository, TasksRepository>();
 builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();

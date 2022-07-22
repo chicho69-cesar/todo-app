@@ -43,7 +43,7 @@
     text-decoration: none;
     color: var(--secondaryColor);
     font-size: 1.25rem;
-    background: linear-gradient(to bottom right, #55b6fc, #09f);;
+    background: linear-gradient(to bottom right, #55b6fc, #09f);
     box-shadow: var(--btnShadow);
     transition: box-shadow 0.25s ease, transform 0.25s ease;
 }

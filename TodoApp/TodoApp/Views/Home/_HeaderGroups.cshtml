@@ -1,5 +1,7 @@
 ﻿@model string
 
+<link rel="stylesheet" href="~/css/groups/header.css" asp-append-version="true"/>
+
 <div class="container-header">
     <h3 class="groups-title">
         Grupos de @Model
@@ -7,22 +9,22 @@
 
     <section class="group-container">
         <article class="group-column">
-            <h4 class="group-column-title">
+            <p class="group-column-title">
                 ¿Deseas crear un nuevo grupo?
-            </h4>
+            </p>
 
-            <a asp-action="Create" asp-controller="Groups" class="group-create">
+            <a asp-action="Create" asp-controller="Groups" class="group-button btn-create">
                 <i class="bi bi-plus-lg"></i> 
                 Crear
             </a>
         </article>
 
         <article class="group-column">
-            <h4 class="group-column-title">
+            <p class="group-column-title">
                 ¿Deseas formar parte de un grupo?
-            </h4>
+            </p>
 
-            <a asp-action="Enter" asp-controller="Groups" class="group-create">
+            <a asp-action="Enter" asp-controller="Groups" class="group-button btn-enter">
                 <i class="bi bi-box-arrow-right"></i> 
                 Entrar
             </a>
