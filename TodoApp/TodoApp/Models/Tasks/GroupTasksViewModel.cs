@@ -3,6 +3,8 @@ using TodoApp.Data;
 
 namespace TodoApp.Models {
     public class GroupTasksViewModel {
+        public int GroupId { get; set; }
+
         [Display(Name = "Grupo")]
         public string Name { get; set; }
 

@@ -1,0 +1,39 @@
+﻿@model EnterGroupViewModel
+
+@{
+    ViewData["Title"] = "Entra a un grupo";
+}
+
+<link rel="stylesheet" href="~/css/groups/general-styles.css" asp-append-version="true"/>
+<link rel="stylesheet" href="~/css/groups/enter.css" asp-append-version="true"/>
+
+<section class="container">
+    <form asp-action="Enter" asp-controller="Groups" class="form">
+        <div asp-validation-summary="ModelOnly" class="error"></div>
+
+        <a asp-action="Index" asp-controller="Home" 
+        asp-route-charge="Groups" class="return">
+            <i class="bi bi-arrow-left"></i>
+        </a>
+
+        <div class="group">
+            <div class="label-group">
+                <label asp-for="Code" class="label"></label>
+                <span class="required">*</span>
+            </div>
+            
+            <input asp-for="Code" class="input" placeholder="#1090..."/>
+            <span asp-validation-for="Code" class="error"></span>
+        </div>
+
+        <div class="buttons">
+            <button type="submit" value="Enter" class="btn">
+                ¡Listo!
+            </button>
+        </div>
+    </form>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial"/>
+}
