@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TodoApp.Data;
+using TodoApp.Enums;
 using TodoApp.Services.Interfaces;
 
 namespace TodoApp.Services {
@@ -30,5 +31,32 @@ namespace TodoApp.Services {
                 .ThenInclude(ug => ug.User)
                 .FirstOrDefaultAsync();
         }
+
+        public async Task<bool> Add(Group group, User user) {
+            try {
+                var searchedUser = _contex.Users
+                .FirstOrDefaultAsync(u => u.Id == user.Id);
+
+                await _contex.Groups.AddAsync(group);
+                await _contex.SaveChangesAsync();
+
+                var searchedGroup = await _contex.Groups
+                    .FindAsync(group);
+
+                await _contex.UserGroups.AddAsync(new UserGroup {
+                    UserId = user.Id,
+                    User = user,
+                    GroupId = searchedGroup.Id,
+                    Group = searchedGroup,
+                    State = (int)StateInGroup.Activo
+                });
+
+                await _contex.SaveChangesAsync();
+
+                return true;
+            } catch (Exception) {
+                return false;
+            }
+        } 
     }
 }
