@@ -62,6 +62,7 @@ namespace TodoApp.Controllers {
         [HttpPost]
         public async Task<IActionResult> Create(CreateGroupViewModel model) {
             if (!ModelState.IsValid) {
+                ModelState.AddModelError(string.Empty, "Error en la informacion");
                 return View(model);
             }
 
@@ -79,6 +80,39 @@ namespace TodoApp.Controllers {
                 return RedirectToAction(nameof(Details), new { groupId = group.Id });
             } else {
                 ModelState.AddModelError(string.Empty, "Ocurrio un error al crear el grupo");
+                return View(model);
+            }
+        }
+
+        [HttpGet]
+        public IActionResult Enter() {
+            return View(new EnterGroupViewModel());
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Enter(EnterGroupViewModel model) {
+            if (!ModelState.IsValid) {
+                ModelState.AddModelError(string.Empty, "Escribe un codigo valido");
+                return View(model);
+            }
+
+            var userId = _userService.GetUserById();
+            var user = await _userRepository.GetUserAsync(userId);
+
+            string code = (model.Code).Trim(new char[] { '#' });
+            int groupId = int.Parse(code);
+            var group = await _groupsRepository.GetGroup(groupId);
+
+            if ((user is null) || (group is null)) {
+                return NotFound();
+            }
+
+            var band = await _groupsRepository.Enter(groupId, user);
+
+            if (band) {
+                return RedirectToAction(nameof(Details), new { groupId });
+            } else {
+                ModelState.AddModelError(string.Empty, "Codigo incorrecto");
                 return View(model);
             }
         }

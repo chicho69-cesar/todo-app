@@ -34,8 +34,8 @@ namespace TodoApp.Services {
 
         public async Task<bool> Add(Group group, User user) {
             try {
-                var searchedUser = _contex.Users
-                .FirstOrDefaultAsync(u => u.Id == user.Id);
+                var searchedUser = await _contex.Users
+                    .FirstOrDefaultAsync(u => u.Id == user.Id);
 
                 await _contex.Groups.AddAsync(group);
                 await _contex.SaveChangesAsync();
@@ -44,8 +44,8 @@ namespace TodoApp.Services {
                     .FindAsync(group);
 
                 await _contex.UserGroups.AddAsync(new UserGroup {
-                    UserId = user.Id,
-                    User = user,
+                    UserId = searchedUser.Id,
+                    User = searchedUser,
                     GroupId = searchedGroup.Id,
                     Group = searchedGroup,
                     State = (int)StateInGroup.Activo
@@ -57,6 +57,29 @@ namespace TodoApp.Services {
             } catch (Exception) {
                 return false;
             }
-        } 
+        }
+
+        public async Task<bool> Enter(int groupId, User user) {
+            try {
+                var searchedUser = await _contex.Users
+                    .FirstOrDefaultAsync(u => u.Id == user.Id);
+                var searchedGroup = await _contex.Groups
+                    .FirstOrDefaultAsync(g => g.Id == groupId);
+
+                await _contex.UserGroups.AddAsync(new UserGroup {
+                    UserId = searchedUser.Id,
+                    User = searchedUser,
+                    GroupId = searchedGroup.Id,
+                    Group = searchedGroup,
+                    State = (int)StateInGroup.Activo
+                });
+
+                await _contex.SaveChangesAsync();
+
+                return true;
+            } catch (Exception) {
+                return false;
+            }
+        }
     }
 }
