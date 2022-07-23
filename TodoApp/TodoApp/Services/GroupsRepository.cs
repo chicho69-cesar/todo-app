@@ -34,14 +34,14 @@ namespace TodoApp.Services {
 
         public async Task<bool> Add(Group group, User user) {
             try {
+                var insertedGroup = await _contex.Groups.AddAsync(group);
+                await _contex.SaveChangesAsync();
+                
                 var searchedUser = await _contex.Users
                     .FirstOrDefaultAsync(u => u.Id == user.Id);
 
-                await _contex.Groups.AddAsync(group);
-                await _contex.SaveChangesAsync();
-
                 var searchedGroup = await _contex.Groups
-                    .FindAsync(group);
+                    .FirstOrDefaultAsync(g => g.Id == insertedGroup.Entity.Id);
 
                 await _contex.UserGroups.AddAsync(new UserGroup {
                     UserId = searchedUser.Id,

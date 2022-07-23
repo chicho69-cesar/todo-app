@@ -1,0 +1,93 @@
+﻿main {
+    width: 100%;
+    padding: 2rem 0;
+}
+
+.container {
+    width: 75%;
+    margin: 7.5rem auto;
+}
+
+.form {
+    position: relative;
+    width: 400px;
+    margin: 0 auto;
+    padding: 1.25rem;
+    border-radius: 0.5rem;
+    background-color: var(--secondBackground);
+    box-shadow: var(--formShadow);
+    font-family: sans-serif;
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 1.5rem;
+}
+
+.group {
+    width: 100%;
+}
+
+.label-group {
+    display: block;
+    width: 100%;
+    margin-bottom: 0.25rem;
+    color: var(--secondaryColor);
+}
+
+.label {
+    font-size: 1rem;
+}
+
+.input {
+    width: 100%;
+    padding: 0.25rem 0;
+    background-color: var(--secondBackground);
+    color: var(--secondaryColor);
+    font-family: inherit;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid var(--borderColor);
+    font-size: 1.25rem;
+}
+
+.btn {
+    cursor: pointer;
+    width: 100%;
+    padding: 0.75rem 0;
+    border: none;
+    border-radius: 0.25rem;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    font-size: 1.125rem;
+    font-family: inherit;
+    box-shadow: var(--buttonShadow);
+    background: var(--themeColor);
+    transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.btn:hover {
+    box-shadow: none;
+    transform: translateY(-1.25px);
+}
+
+.return {
+    display: inline-block;
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+    line-height: 35px;
+    text-align: center;
+    font-size: 1.25rem;
+    background: var(--themeColor);
+    box-shadow: var(--btnShadow);
+    color: #fff;
+    transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.return:hover {
+    box-shadow: none;
+    transform: translateY(-1.25px);
+}

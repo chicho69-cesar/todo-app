@@ -3,6 +3,7 @@
 namespace TodoApp.Models {
     public class CreateGroupViewModel {
         [Display(Name = "Nombre")]
+        [Required(ErrorMessage = "El {0} del grupo es requerido")]
         public string Name { get; set; }
 
         [Display(Name = "Foto")]

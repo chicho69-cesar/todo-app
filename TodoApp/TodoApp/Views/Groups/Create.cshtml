@@ -1,0 +1,47 @@
+﻿@model CreateGroupViewModel
+
+@{
+    ViewData["Title"] = "Crea un grupo";
+}
+
+<link rel="stylesheet" href="~/css/groups/general-styles.css" asp-append-version="true"/>
+<link rel="stylesheet" href="~/css/groups/create.css" asp-append-version="true"/>
+
+<section class="container">
+    <form asp-action="Create" asp-controller="Groups"
+    enctype="multipart/form-data" class="form">
+        <div asp-validation-summary="ModelOnly" class="error"></div>
+
+        <a asp-action="Index" asp-controller="Home" 
+        asp-route-charge="Groups" class="return">
+            <i class="bi bi-arrow-left"></i>
+        </a>
+
+        <div class="group">
+            <div class="label-group">
+                <label asp-for="Name" class="label"></label>
+                <span class="required">*</span>
+            </div>
+            
+            <input asp-for="Name" class="input" placeholder="Nombre del grupo..."/>
+            <span asp-validation-for="Name" class="error"></span>
+        </div>
+
+        <div class="buttons">
+            <label asp-for="ImageFile" class="btn-image btn">
+                <i class="bi bi-card-image"></i>
+            </label>
+
+            <input asp-for="ImageFile" class="form-image"/>
+            <span asp-validation-for="ImageFile" class="error"></span>
+
+            <button type="submit" value="Create" class="btn">
+                ¡Listo!
+            </button>
+        </div>
+    </form>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

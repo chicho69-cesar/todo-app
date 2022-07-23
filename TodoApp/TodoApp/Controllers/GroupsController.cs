@@ -11,19 +11,22 @@ namespace TodoApp.Controllers {
         private readonly IGroupsRepository _groupsRepository;
         private readonly ITasksRepository _tasksRepository;
         private readonly IMapper _mapper;
+        private readonly IBlobService _blobService;
 
         public GroupsController(
             IUserService userService,
             IUserRepository userRepository,
             IGroupsRepository groupsRepository,
             ITasksRepository tasksRepository,
-            IMapper mapper
+            IMapper mapper,
+            IBlobService blobService
         ) {
             _userService = userService;
             _userRepository = userRepository;
             _groupsRepository = groupsRepository;
             _tasksRepository = tasksRepository;
             _mapper = mapper;
+            _blobService = blobService;
         }
 
         [HttpGet]
@@ -47,6 +50,7 @@ namespace TodoApp.Controllers {
             }
 
             var model = new GroupTasksViewModel {
+                GroupId = groupId,
                 Name = group.Name,
                 Tasks = await _tasksRepository.GetAllTasks(groupId)
             };
@@ -65,6 +69,14 @@ namespace TodoApp.Controllers {
                 ModelState.AddModelError(string.Empty, "Error en la informacion");
                 return View(model);
             }
+
+            Guid imageId = Guid.Empty;
+
+            if (model.ImageFile != null) {
+                imageId = await _blobService.UploadBlobAsync(model.ImageFile, "groups");
+            }
+
+            model.ImageId = imageId;
 
             var userId = _userService.GetUserById();
             var user = await _userRepository.GetUserAsync(userId);
