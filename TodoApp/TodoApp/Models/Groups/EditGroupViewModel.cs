@@ -6,6 +6,7 @@ namespace TodoApp.Models {
 
         [Display(Name = "Nombre")]
         [MaxLength(100, ErrorMessage = "El {0} debe tener maximo {1} caracteres")]
+        [Required(ErrorMessage = "El {0} es necesario")]
         public string Name { get; set; }
 
         [Display(Name = "Foto")]
