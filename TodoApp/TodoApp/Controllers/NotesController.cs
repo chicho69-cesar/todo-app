@@ -83,6 +83,7 @@ namespace TodoApp.Controllers {
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(EditNoteViewModel model) {
             if (!ModelState.IsValid) {
+                ModelState.AddModelError(string.Empty, "La nota que especificaste es incorrecta");
                 return View(model);
             }
 

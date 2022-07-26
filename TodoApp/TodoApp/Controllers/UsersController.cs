@@ -78,6 +78,7 @@ namespace TodoApp.Controllers {
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterViewModel model) {
             if (!ModelState.IsValid) {
+                ModelState.AddModelError(string.Empty, "Error en la informacion proporcionada");
                 return View(model);
             }
 
@@ -127,6 +128,7 @@ namespace TodoApp.Controllers {
         [HttpPost]
         public async Task<IActionResult> EditInfo(EditInfoViewModel model) {
             if (!ModelState.IsValid) {
+                ModelState.AddModelError(string.Empty, "Tienes un error en la informacion proporcionada");
                 return View(model);
             }
             

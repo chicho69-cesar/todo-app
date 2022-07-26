@@ -1,0 +1,44 @@
+﻿@model EditGroupViewModel
+
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<section class="main">
+    <form asp-action="Edit" enctype="multipart/form-data" class="form">
+        <div asp-validation-summary="ModelOnly" class="error"></div>
+
+        <a class="return" asp-action="Index" asp-controller="Home" asp-route-charge="Groups">
+            <i class="bi bi-arrow-left"></i>
+        </a>
+
+        <input type="hidden" asp-for="Id"/>
+
+        <div class="form-group">
+            <div class="label-group">
+                <label asp-for="Name" class="form-label"></label>
+                <span class="required">*</span>
+            </div>
+
+            <input asp-for="Name" class="form-input" placeholder="jhon@gmail.com"/>
+            <span asp-validation-for="Name" class="error"></span>
+        </div>
+
+        <div class="image-container">
+            <img src="@Model.ImageFullPath" alt="@Model.Name" class="edit-image"/>
+        </div>
+
+        <div class="buttons">
+            <label asp-for="ImageFile" class="label-image btn">
+                <i class="bi bi-card-image"></i>
+            </label>
+
+            <input asp-for="ImageFile" class="form-image"/>
+            <span asp-validation-for="ImageFile" class="error"></span>
+
+            <button type="submit" value="Edit" class="btn">
+                ¡Listo!
+            </button>
+        </div>
+    </form>
+</section>

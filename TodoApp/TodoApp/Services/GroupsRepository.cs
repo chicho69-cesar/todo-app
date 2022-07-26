@@ -81,5 +81,23 @@ namespace TodoApp.Services {
                 return false;
             }
         }
+
+        public async Task<bool> UpdateGroup(Group group) {
+            try {
+                var updatedGroup = await _contex.Groups
+                    .Where(g => g.Id == group.Id)
+                    .FirstOrDefaultAsync();
+
+                updatedGroup.Name = group.Name;
+                updatedGroup.ImageId = group.ImageId;
+
+                _contex.Entry(updatedGroup).State = EntityState.Modified;
+                await _contex.SaveChangesAsync();
+
+                return true;
+            } catch (Exception) {
+                return false;
+            }
+        }
     }
 }

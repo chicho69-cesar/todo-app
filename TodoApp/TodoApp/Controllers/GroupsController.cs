@@ -128,5 +128,50 @@ namespace TodoApp.Controllers {
                 return View(model);
             }
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int groupId) {
+            var group = await _groupsRepository.GetGroup(groupId);
+
+            if (group is null) {
+                return NotFound();
+            }
+
+            var model = _mapper.Map<EditGroupViewModel>(group);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(EditGroupViewModel model) {
+            if (!ModelState.IsValid) {
+                ModelState.AddModelError(string.Empty, "La informacion del grupo es invalida");
+                return View(model);
+            }
+
+            var group = await _groupsRepository.GetGroup(model.Id);
+
+            if (group.ImageId != Guid.Empty) {
+                await _blobService.DeleteBlobAsync(group.ImageId, "groups");
+            }
+
+            Guid imageId = Guid.Empty;
+
+            if (model.ImageFile != null) {
+                imageId = await _blobService.UploadBlobAsync(model.ImageFile, "groups");
+            }
+
+            group.Name = model.Name;
+            group.ImageId = imageId;
+
+            bool band = await _groupsRepository.UpdateGroup(group);
+
+            if (band) {
+                return RedirectToAction(nameof(Details), new { groupId = group.Id });
+            } else {
+                ModelState.AddModelError(string.Empty, "Ocurrio un error al editar el grupo");
+                return View(model);
+            }
+        }
     }
 }

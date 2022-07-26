@@ -15,6 +15,7 @@ namespace TodoApp.Services {
             CreateMap<User, UserDetailsViewModel>().ReverseMap();
             CreateMap<User, EditInfoViewModel>().ReverseMap();
             CreateMap<Group, CreateGroupViewModel>().ReverseMap();
+            CreateMap<Group, EditGroupViewModel>().ReverseMap();
         }
     }
 }
