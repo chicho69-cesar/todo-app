@@ -1,0 +1,10 @@
+﻿@using TodoApp.Data
+@model IEnumerable<TaskWork>
+
+@{
+
+}
+
+@foreach (var task in Model) {
+    <p>@task.Text</p>
+}
