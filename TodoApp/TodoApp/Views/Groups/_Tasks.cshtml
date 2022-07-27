@@ -1,10 +1,76 @@
 ﻿@using TodoApp.Data
+@using TodoApp.Enums
 @model IEnumerable<TaskWork>
 
 @{
+    StateTask getState(int state) => state switch {
+        0 => StateTask.Activa,
+        1 => StateTask.Terminada,
+        2 => StateTask.Cancelada,
+        _ => StateTask.Activa
+    };
 
+    string getStrDate(DateTime date, string type) => date.ToString(type);
+
+    Func<DateTime, DateTime, string> functionDate = (DateTime start, DateTime end) => {
+        string startDate = $"{getStrDate(start, "dd")}/" +
+                            $"{getStrDate(start, "MM")}/" + 
+                            $"{getStrDate(start, "yyyy")}" + 
+                            $" a las {getStrDate(start, "hh:mm tt")}";
+        
+        string endDate = $"{getStrDate(end, "dd")}/" +
+                            $"{getStrDate(end, "MM")}/" + 
+                            $"{getStrDate(end, "yyyy")}" + 
+                            $" a las {getStrDate(end, "hh:mm tt")}";
+        
+        return $"{startDate}   -   {endDate}";
+    };
+
+    var getDate = functionDate;
+
+    var model = new ModalViewModel {
+        Question = "¿Estas seguro de eliminar esta tarea?",
+        OptionDelete = "Eliminar",
+        OptionCancel = "Cancelar"
+    };
 }
 
 @foreach (var task in Model) {
-    <p>@task.Text</p>
+    <article class="task @task.Id">
+        <div class="task-description">
+            <section class="task-dates">
+                <p class="task-date">
+                    @getDate(task.StartDate, task.EndDate)
+                </p>
+
+                <p class="task-state">
+                    @($"{getState(task.State)}")
+                </p>
+            </section>
+            
+            <p class="task-text @(task.State == 2 ? "task-canceled" : null)">@task.Text</p>
+        </div>
+
+        <div class="task-actions">
+            <a class="action-btn action-btn-complete @task.Id">
+                @if (task.State == 1) {
+                    <i class="bi bi-check2-square"></i>
+                } else {
+                    <i class="bi bi-square"></i>
+                }
+            </a>
+
+            <a class="action-btn action-btn-edit" 
+            asp-action="Edit" asp-controller="TaskWorks" 
+            asp-route-taskId="@task.Id">
+                <i class="bi bi-pencil"></i>
+            </a>
+
+            <a class="action-btn action-btn-delete @task.Id">
+                <i class="bi bi-trash"></i>
+            </a>
+        </div>
+    </article>
 }
+
+<partial name="_Modal" model="model"/>
