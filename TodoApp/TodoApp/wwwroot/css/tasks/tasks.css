@@ -1,0 +1,69 @@
+﻿.task {
+    width: 100%;
+    padding: 1rem;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.task:nth-child(even) {
+    background-color: var(--alternateColor);
+}
+
+.task-description {
+    width: 70%;
+}
+
+.task-details {
+    margin-bottom: 0.25rem;
+    font-size: 0.9rem;
+    color: var(--themeNote);
+}
+
+.task-state {
+    font-size: 0.95rem;
+    font-weight: bold;
+}
+
+.task-dates {
+    margin-bottom: 0.125rem;
+}
+
+.task-text {
+    font-size: 1.2rem;
+}
+
+.task-actions {
+    width: 28%;
+    display: flex;
+    flex-flow: row nowrap;
+    gap: 0.75rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.action-btn {
+    cursor: pointer;
+    display: inline-block;
+    padding: 0.5rem;
+    border: none;
+    border-radius: 0.25rem;
+    font-size: 1.125rem;
+    color: #151515;
+    box-shadow: var(--btnShadow);
+    transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.action-btn:hover {
+    box-shadow: none;
+    transform: translateY(-1.5px);
+}
+
+.action-btn-complete { background-color: aqua; }
+.action-btn-edit { background-color: #fab32e; }
+.action-btn-delete { background-color: #fd3939; }
+
+.task-canceled {
+    text-decoration: line-through;
+}

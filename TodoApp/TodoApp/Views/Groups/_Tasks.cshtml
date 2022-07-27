@@ -35,11 +35,13 @@
     };
 }
 
+<link rel="stylesheet" href="~/css/tasks/tasks.css" asp-append-version="true"/>
+
 @foreach (var task in Model) {
     <article class="task @task.Id">
         <div class="task-description">
-            <section class="task-dates">
-                <p class="task-date">
+            <section class="task-details">
+                <p class="task-dates">
                     @getDate(task.StartDate, task.EndDate)
                 </p>
 

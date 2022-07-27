@@ -1,0 +1,18 @@
+﻿main {
+    width: 100%;
+    margin: 3rem 0;
+}
+
+.main {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.container {
+    width: 75%;
+    margin: 2rem auto;
+    border-radius: 0.5rem;
+    color: var(--secondaryColor);
+    background-color: var(--secondBackground);
+    box-shadow: var(--formShadow);
+}
