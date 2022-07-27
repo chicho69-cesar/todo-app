@@ -1,0 +1,11 @@
+﻿.label-group {
+    display: block;
+    width: 100%;
+    margin-bottom: 0.25rem;
+    color: var(--secondaryColor);
+}
+
+.label {
+    display: inline;
+    font-size: 1rem;
+}

@@ -4,4 +4,54 @@
     ViewData["Title"] = "Crea una tarea";
 }
 
-<h1>@Model.GroupId</h1>
+<link rel="stylesheet" href="~/css/notes/general-notes.css" asp-append-version="true"/>
+<link rel="stylesheet" href="~/css/notes/add.css" asp-append-version="true"/>
+<link rel="stylesheet" href="~/css/tasks/create.css" asp-append-version="true"/>
+
+<section class="container">
+    <form asp-action="Add" asp-controller="TaskWorks" 
+    enctype="multipart/form-data" class="form">
+        <div asp-validation-summary="ModelOnly" class="error"></div>
+        
+        <input type="hidden" asp-for="GroupId"/>
+
+        <h3 class="add-title">Agrega una Tarea</h3>
+
+        <div class="group">
+            <div class="label-group">
+                <label asp-for="Text" class="label"></label>
+                <span class="required">*</span>
+            </div>
+
+            <textarea asp-for="Text" class="input" placeholder="Escribe una tarea..."></textarea>
+            <span asp-validation-for="Text" class="error"></span>
+        </div>
+
+        <div class="group">
+            <div class="label-group">
+                <label asp-for="FinishDate" class="label"></label>
+                <span class="required">*</span>
+            </div>
+
+            <input asp-for="FinishDate" class="input" placeholder="Escribe una tarea..." style="resize: none;"/>
+            <span asp-validation-for="FinishDate" class="error"></span>
+        </div>
+
+        <div class="buttons">
+            <button type="submit" value="Add" class="btn ok">
+                <i class="bi bi-plus-lg"></i>  
+                Agregar
+            </button>
+
+            <a asp-action="Details" asp-controller="Groups" 
+            asp-route-groupId="@Model.GroupId" class="btn cancel">
+                <i class="bi bi-x-lg"></i> 
+                Cancelar
+            </a>
+        </div>
+    </form>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

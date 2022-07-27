@@ -11,6 +11,7 @@ namespace TodoApp.Models {
 
         [Display(Name = "Fecha limite")]
         [DataType(DataType.DateTime)]
-        public DateTime FinishDate { get; set; }
+        [Required(ErrorMessage = "La fecha de fin de la tarea es requerida")]
+        public DateTime FinishDate { get; set; } = DateTime.Parse(DateTime.Now.ToString("dd-MM-yyyy hh:mm tt"));
     }
 }
