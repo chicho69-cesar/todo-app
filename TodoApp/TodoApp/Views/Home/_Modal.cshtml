@@ -1,22 +1,24 @@
-﻿@model string
+﻿@model ModalViewModel
+
+<link rel="stylesheet" href="~/css/home/modal.css" asp-append-version="true"/>
 
 <div class="modal hidde">
     <span class="modal-value 0"></span>
 
     <div class="modal-body">
         <h3 class="modal-title">
-            ¿Estas seguro de eliminar este elemento?
+            @Model.Question
         </h3>
 
         <div class="modal-buttons">
             <a class="modal-btn modal-delete">
                 <i class="bi bi-trash"></i> 
-                Eliminar
+                @Model.OptionDelete
             </a>
 
             <a class="modal-btn modal-cancel">
                 <i class="bi bi-x-lg"></i> 
-                Cancelar
+                @Model.OptionCancel
             </a>
         </div>
     </div>

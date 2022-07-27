@@ -5,14 +5,14 @@ using TodoApp.Services.Interfaces;
 
 namespace TodoApp.Services {
     public class GroupsRepository : IGroupsRepository {
-        private readonly TodoAppContext _contex;
+        private readonly TodoAppContext _context;
 
-        public GroupsRepository(TodoAppContext contex) {
-            _contex = contex;
+        public GroupsRepository(TodoAppContext context) {
+            _context = context;
         }
 
         public async Task<IEnumerable<Group>> GetGroups(int userId) {
-            var userGroups = await _contex.UserGroups
+            var userGroups = await _context.UserGroups
                 .Where(ug => ug.UserId == userId)
                 .ToListAsync();
 
@@ -24,7 +24,7 @@ namespace TodoApp.Services {
         }
 
         public async Task<Group> GetGroup(int groupId) {
-            return await _contex.Groups
+            return await _context.Groups
                 .Where(g => g.Id == groupId)
                 .Include(g => g.TaskWorks)
                 .Include(g => g.UserGroups)
@@ -34,16 +34,16 @@ namespace TodoApp.Services {
 
         public async Task<bool> Add(Group group, User user) {
             try {
-                var insertedGroup = await _contex.Groups.AddAsync(group);
-                await _contex.SaveChangesAsync();
+                var insertedGroup = await _context.Groups.AddAsync(group);
+                await _context.SaveChangesAsync();
                 
-                var searchedUser = await _contex.Users
+                var searchedUser = await _context.Users
                     .FirstOrDefaultAsync(u => u.Id == user.Id);
 
-                var searchedGroup = await _contex.Groups
+                var searchedGroup = await _context.Groups
                     .FirstOrDefaultAsync(g => g.Id == insertedGroup.Entity.Id);
 
-                await _contex.UserGroups.AddAsync(new UserGroup {
+                await _context.UserGroups.AddAsync(new UserGroup {
                     UserId = searchedUser.Id,
                     User = searchedUser,
                     GroupId = searchedGroup.Id,
@@ -51,7 +51,7 @@ namespace TodoApp.Services {
                     State = (int)StateInGroup.Activo
                 });
 
-                await _contex.SaveChangesAsync();
+                await _context.SaveChangesAsync();
 
                 return true;
             } catch (Exception) {
@@ -61,12 +61,12 @@ namespace TodoApp.Services {
 
         public async Task<bool> Enter(int groupId, User user) {
             try {
-                var searchedUser = await _contex.Users
+                var searchedUser = await _context.Users
                     .FirstOrDefaultAsync(u => u.Id == user.Id);
-                var searchedGroup = await _contex.Groups
+                var searchedGroup = await _context.Groups
                     .FirstOrDefaultAsync(g => g.Id == groupId);
 
-                await _contex.UserGroups.AddAsync(new UserGroup {
+                await _context.UserGroups.AddAsync(new UserGroup {
                     UserId = searchedUser.Id,
                     User = searchedUser,
                     GroupId = searchedGroup.Id,
@@ -74,7 +74,7 @@ namespace TodoApp.Services {
                     State = (int)StateInGroup.Activo
                 });
 
-                await _contex.SaveChangesAsync();
+                await _context.SaveChangesAsync();
 
                 return true;
             } catch (Exception) {
@@ -84,15 +84,32 @@ namespace TodoApp.Services {
 
         public async Task<bool> UpdateGroup(Group group) {
             try {
-                var updatedGroup = await _contex.Groups
+                var updatedGroup = await _context.Groups
                     .Where(g => g.Id == group.Id)
                     .FirstOrDefaultAsync();
 
                 updatedGroup.Name = group.Name;
                 updatedGroup.ImageId = group.ImageId;
 
-                _contex.Entry(updatedGroup).State = EntityState.Modified;
-                await _contex.SaveChangesAsync();
+                _context.Entry(updatedGroup).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
+
+                return true;
+            } catch (Exception) {
+                return false;
+            }
+        }
+
+        public async Task<bool> DeleteGroup(int groupId) {
+            try {
+                var group = await _context.Groups
+                    .Where(g => g.Id == groupId)
+                    .FirstAsync();
+
+                if (group is not null && group.UserGroups.Count == 0) {
+                    _context.Groups.Remove(group);
+                    await _context.SaveChangesAsync();
+                }
 
                 return true;
             } catch (Exception) {

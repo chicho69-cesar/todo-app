@@ -15,17 +15,20 @@
         string month = date.ToString("MM");
         string year = date.ToString("yyyy");
         string hour = date.ToString("hh:mm tt");
-        
+
         return $"{day}/{month}/{year} a las {hour} - {state}";
     };
 
     var getDetails = functionDate;
 
-    string textModel = "";
+    var model = new ModalViewModel {
+        Question = "¿Estas seguro de eliminar este elemento?",
+        OptionDelete = "Eliminar",
+        OptionCancel = "Cancelar"
+    };
 }
 
 <link rel="stylesheet" href="~/css/home/notes.css" asp-append-version="true"/>
-<link rel="stylesheet" href="~/css/home/modal.css" asp-append-version="true"/>
 
 @foreach (var note in Model) {
     <article class="note @note.Id">
@@ -56,7 +59,7 @@
     </article>
 }
 
-<partial name="_Modal" model="textModel"/>
+<partial name="_Modal" model="model"/>
 
 <script src="~/js/notes/complete.js"></script>
 <script src="~/js/notes/delete.js"></script>

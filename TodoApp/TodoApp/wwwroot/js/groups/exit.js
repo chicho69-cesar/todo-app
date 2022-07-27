@@ -4,10 +4,10 @@ const value = document.querySelector('.modal-value');
 const confirmDelete = document.querySelector('.modal-delete');
 const cancelDelete = document.querySelector('.modal-cancel');
 
-const API_DELETE = 'https://localhost:7193/notes/delete';
+const API_EXIT = 'https://localhost:7193/groups/exit';
 
-const deleteNote = async noteId => {
-    const request = `${API_DELETE}/${noteId}`;
+const exitGroup = async groupId => {
+    const request = `${API_EXIT}/${groupId}`;
     const options = {
         method: 'DELETE',
         headers: {
@@ -18,7 +18,7 @@ const deleteNote = async noteId => {
     try {
         const response = await fetch(request, options);
         return (response.status === 200);
-    } catch(error) {
+    } catch (error) {
         return false;
     }
 }
@@ -36,14 +36,14 @@ cancelDelete.addEventListener('click', () => {
 });
 
 confirmDelete.addEventListener('click', async () => {
-    let noteId = (Number)(value.classList[1]);
-    let result = await deleteNote(noteId);
+    let groupId = (Number)(value.classList[1]);
+    let result = await exitGroup(groupId);
 
     if (result) {
-        let deleteNotes = document.querySelectorAll('.note');
-        for (const deleteNote of deleteNotes) {
-            if ((Number)(deleteNote.classList[1]) === noteId) {
-                deleteNote.remove();
+        let exitedGroups = document.querySelectorAll('.group');
+        for (const deleteGroup of exitedGroups) {
+            if ((Number)(deleteGroup.classList[1]) === groupId) {
+                deleteGroup.remove();
                 break;
             }
         }

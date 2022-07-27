@@ -7,6 +7,12 @@
     };
 
     var NumberOfTasks = func;
+
+    var model = new ModalViewModel {
+        Question = "¿Estas seguro de salir de este grupo?",
+        OptionDelete = "Salir",
+        OptionCancel = "Cancelar"
+    };
 }
 
 <link rel="stylesheet" href="~/css/groups/groups.css" asp-append-version="true"/>
@@ -22,7 +28,7 @@
 
             <div class="group-details">
                 <p class="group-code">
-                    #@group.Id - @NumberOfTasks(group) Tarea@(NumberOfTasks(group) > 1 ? "s" : null)
+                    #@group.Id - @NumberOfTasks(group) Tarea@(NumberOfTasks(group) != 1 ? "s" : null)
                 </p>
                 <h3 class="group-name">@group.Name</h3>
             </div>
@@ -35,11 +41,13 @@
                 <i class="bi bi-pencil"></i>
             </a>
 
-            <a class="action-btn action-btn-delete @group.Id"
-            asp-action="Exit" asp-controller="Groups" 
-            asp-route-groupId="@group.Id">
+            <a class="action-btn action-btn-delete @group.Id">
                 <i class="bi bi-box-arrow-left"></i>
             </a>
         </div>
     </article>
 }
+
+<partial name="_Modal" model="model"/>
+
+<script src="~/js/groups/exit.js"></script>

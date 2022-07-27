@@ -9,6 +9,7 @@ namespace TodoApp.Controllers {
         private readonly IUserService _userService;
         private readonly IUserRepository _userRepository;
         private readonly IGroupsRepository _groupsRepository;
+        private readonly IUserGroupsRepository _userGroupsRepository;
         private readonly ITasksRepository _tasksRepository;
         private readonly IMapper _mapper;
         private readonly IBlobService _blobService;
@@ -17,6 +18,7 @@ namespace TodoApp.Controllers {
             IUserService userService,
             IUserRepository userRepository,
             IGroupsRepository groupsRepository,
+            IUserGroupsRepository userGroupsRepository,
             ITasksRepository tasksRepository,
             IMapper mapper,
             IBlobService blobService
@@ -24,6 +26,7 @@ namespace TodoApp.Controllers {
             _userService = userService;
             _userRepository = userRepository;
             _groupsRepository = groupsRepository;
+            _userGroupsRepository = userGroupsRepository;
             _tasksRepository = tasksRepository;
             _mapper = mapper;
             _blobService = blobService;
@@ -172,6 +175,27 @@ namespace TodoApp.Controllers {
                 ModelState.AddModelError(string.Empty, "Ocurrio un error al editar el grupo");
                 return View(model);
             }
+        }
+
+        [HttpDelete]
+        [Route("groups/exit/{id}")]
+        public async Task<IActionResult> Exit(int id) {
+            var userId = _userService.GetUserById();
+            var user = await _userRepository.GetUserAsync(userId);
+            var group = await _groupsRepository.GetGroup(id);
+
+            if (user is null || group is null) {
+                return BadRequest();
+            }
+
+            var userGroup = await _userGroupsRepository.GetUserGroupAsync(userId, id);
+
+            if (userGroup is null) {
+                return BadRequest();
+            }
+
+            return (await _userGroupsRepository.DeleteUserGroupAsync(userGroup.Id)
+                ? Ok() : BadRequest());
         }
     }
 }
