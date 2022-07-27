@@ -39,6 +39,7 @@ namespace TodoApp.Controllers {
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Add(AddTaskViewModel model) {
             if (!ModelState.IsValid) {
                 ModelState.AddModelError(string.Empty, "Hay un error en la informacion que nos proporcionaste");
@@ -102,6 +103,7 @@ namespace TodoApp.Controllers {
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(EditTaskViewModel model) {
             if (!ModelState.IsValid) {
                 ModelState.AddModelError(string.Empty, "La informacion que proporcionaste no es correcta");

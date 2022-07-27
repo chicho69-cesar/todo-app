@@ -73,6 +73,7 @@ namespace TodoApp.Controllers {
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CreateGroupViewModel model) {
             if (!ModelState.IsValid) {
                 ModelState.AddModelError(string.Empty, "Error en la informacion");
@@ -111,6 +112,7 @@ namespace TodoApp.Controllers {
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Enter(EnterGroupViewModel model) {
             if (!ModelState.IsValid) {
                 ModelState.AddModelError(string.Empty, "Escribe un codigo valido");
@@ -152,6 +154,7 @@ namespace TodoApp.Controllers {
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(EditGroupViewModel model) {
             if (!ModelState.IsValid) {
                 ModelState.AddModelError(string.Empty, "La informacion del grupo es invalida");

@@ -126,6 +126,7 @@ namespace TodoApp.Controllers {
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditInfo(EditInfoViewModel model) {
             if (!ModelState.IsValid) {
                 ModelState.AddModelError(string.Empty, "Tienes un error en la informacion proporcionada");

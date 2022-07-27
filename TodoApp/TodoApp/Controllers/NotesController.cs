@@ -34,6 +34,7 @@ namespace TodoApp.Controllers {
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Add(AddNoteViewModel model) {
             if (!ModelState.IsValid) {
                 ModelState.AddModelError(string.Empty, "Ocurrio un error al agregar la nota");
