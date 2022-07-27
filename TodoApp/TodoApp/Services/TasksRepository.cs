@@ -18,5 +18,15 @@ namespace TodoApp.Services {
                 .Include(t => t.Group)
                 .ToListAsync();
         }
+
+        public async Task<bool> AddTask(TaskWork task) {
+            try {
+                await _context.TaskWorks.AddAsync(task);
+                await _context.SaveChangesAsync();
+                return true;
+            } catch (Exception) {
+                return false;
+            }
+        }
     }
 }
