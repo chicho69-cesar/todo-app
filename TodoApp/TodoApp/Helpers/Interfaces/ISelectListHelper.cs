@@ -2,6 +2,6 @@
 
 namespace TodoApp.Helpers.Interfaces {
     public interface ISelectListHelper {
-        IEnumerable<SelectListItem> GetNotesStates();
+        IEnumerable<SelectListItem> GetStates();
     }
 }

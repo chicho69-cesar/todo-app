@@ -7,6 +7,7 @@ namespace TodoApp.Services.Interfaces {
         Task<bool> Enter(int groupId, User user);
         Task<Group> GetGroup(int groupId);
         Task<IEnumerable<Group>> GetGroups(int userId);
+        Task<bool> IsUserInGroup(int groupId, User user);
         Task<bool> UpdateGroup(Group group);
     }
 }

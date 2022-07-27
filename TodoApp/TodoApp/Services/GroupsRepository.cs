@@ -116,5 +116,20 @@ namespace TodoApp.Services {
                 return false;
             }
         }
+
+        public async Task<bool> IsUserInGroup(int groupId, User user) {
+            try {
+                var group = await _context.Groups
+                    .Where(g => g.Id == groupId)
+                    .FirstAsync();
+
+                var isInGroup = group.UserGroups
+                    .Any(ug => ug.UserId == user.Id);
+
+                return isInGroup;
+            } catch (Exception) {
+                return false;
+            }
+        } 
     }
 }
