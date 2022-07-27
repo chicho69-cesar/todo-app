@@ -1,4 +1,28 @@
 ﻿@model DetailGroupViewModel
 
-<h2>@Model.Name</h2>
-<img src="@Model.ImageFullPath" alt="@Model.Name" loading="lazy"/>
+<link rel="stylesheet" href="~/css/tasks/head-details.css" asp-append-version="true"/>
+
+<div class="details-header">
+    <section class="details-group">
+        <img class="details-img" 
+        src="@Model.ImageFullPath" 
+        alt="@Model.Name" 
+        loading="lazy"/>
+
+        <h2 class="details-title">@Model.Name</h2>
+    </section>
+
+    <section class="details-group-add">
+        <p class="add-text">¿Deseas agregar una nueva tarea en este grupo?</p>
+        
+        <a asp-action="Add" asp-controller="TaskWorks" 
+        asp-route-groupId="@Model.GroupId" class="add-link">
+            <i class="bi bi-plus-lg"></i> 
+            Agregar
+        </a>
+    </section>
+
+    <a class="return" asp-action="Index" asp-controller="Home" asp-route-charge="Groups">
+        <i class="bi bi-arrow-left"></i>
+    </a>
+</div>

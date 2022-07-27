@@ -2,6 +2,8 @@
 
 namespace TodoApp.Models {
     public class DetailGroupViewModel {
+        public int GroupId { get; set; }
+
         [Display(Name = "Nombre")]
         public string Name { get; set; }
 
