@@ -8,6 +8,9 @@ namespace TodoApp.Models {
         [Display(Name = "Grupo")]
         public string Name { get; set; }
 
+        [Display(Name = "Imagen")]
+        public string ImageFullPath { get; set; }
+
         [Display(Name = "Tareas")]
         public IEnumerable<TaskWork> Tasks { get; set; }
     }

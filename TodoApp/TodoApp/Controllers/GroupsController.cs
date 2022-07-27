@@ -52,9 +52,15 @@ namespace TodoApp.Controllers {
                 return NotFound();
             }
 
+            //TODO: Cambiar la ruta para el despliegue
+            var imagePath = group.ImageId == Guid.Empty
+                ? $"https://localhost:7193/images/noimage.png"
+                : $"https://todolistapp.blob.core.windows.net/groups/{group.ImageId}";
+
             var model = new GroupTasksViewModel {
                 GroupId = groupId,
                 Name = group.Name,
+                ImageFullPath = imagePath,
                 Tasks = await _tasksRepository.GetAllTasks(groupId)
             };
 

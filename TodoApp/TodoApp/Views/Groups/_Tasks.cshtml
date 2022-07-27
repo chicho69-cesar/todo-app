@@ -14,14 +14,14 @@
 
     Func<DateTime, DateTime, string> functionDate = (DateTime start, DateTime end) => {
         string startDate = $"{getStrDate(start, "dd")}/" +
-                            $"{getStrDate(start, "MM")}/" + 
-                            $"{getStrDate(start, "yyyy")}" + 
-                            $" a las {getStrDate(start, "hh:mm tt")}";
+                        $"{getStrDate(start, "MM")}/" + 
+                        $"{getStrDate(start, "yyyy")}" + 
+                        $" a las {getStrDate(start, "hh:mm tt")}";
         
         string endDate = $"{getStrDate(end, "dd")}/" +
-                            $"{getStrDate(end, "MM")}/" + 
-                            $"{getStrDate(end, "yyyy")}" + 
-                            $" a las {getStrDate(end, "hh:mm tt")}";
+                        $"{getStrDate(end, "MM")}/" + 
+                        $"{getStrDate(end, "yyyy")}" + 
+                        $" a las {getStrDate(end, "hh:mm tt")}";
         
         return $"{startDate}   -   {endDate}";
     };

@@ -2,12 +2,18 @@
 
 @{
     ViewData["Title"] = Model.Name;
+
+    var model = new DetailGroupViewModel {
+        Name = Model.Name,
+        ImageFullPath = Model.ImageFullPath
+    };
 }
 
 <link rel="stylesheet" href="~/css/groups/details.css" asp-append-version="true"/>
 
 <section class="main">
     <div class="container">
+        <partial name="_DetailGroup" model="model"/>
         <partial name="_Tasks" model="Model.Tasks"/>
     </div>
 </section>
