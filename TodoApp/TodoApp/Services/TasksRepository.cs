@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TodoApp.Data;
+using TodoApp.Enums;
 using TodoApp.Services.Interfaces;
 
 namespace TodoApp.Services {
@@ -49,6 +50,48 @@ namespace TodoApp.Services {
                 searchedTask.Text = task.Text;
                 searchedTask.State = task.State;
                 searchedTask.EndDate = task.EndDate;
+
+                _context.Entry(searchedTask).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
+
+                return true;
+            } catch (Exception) {
+                return false;
+            }
+        }
+
+        public async Task<bool> Complete(TaskWork task) {
+            return await Modified(task, true);
+        }
+
+        public async Task<bool> UnComplete(TaskWork task) {
+            return await Modified(task, false);
+        }
+
+        public async Task<bool> Delete(TaskWork task) {
+            try {
+                var searchedTask = await _context.TaskWorks
+                    .Where(t => t.Id == task.Id)
+                    .FirstAsync();
+
+                _context.TaskWorks.Remove(searchedTask);
+                await _context.SaveChangesAsync();
+
+                return true;
+            } catch (Exception) {
+                return false;
+            }
+        }
+
+        private async Task<bool> Modified(TaskWork task, bool complete) {
+            try {
+                var searchedTask = await _context.TaskWorks
+                    .Where(t => t.Id == task.Id)
+                    .FirstAsync();
+
+                searchedTask.State = complete 
+                    ? (int)StateTask.Terminada
+                    : (int)StateTask.Activa;
 
                 _context.Entry(searchedTask).State = EntityState.Modified;
                 await _context.SaveChangesAsync();

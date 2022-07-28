@@ -131,5 +131,36 @@ namespace TodoApp.Controllers {
                 return View(model);
             }
         }
+
+        [HttpPut]
+        [Route("tasks/complete/{id}")]
+        public async Task<IActionResult> Complete(int id) {
+            var task = await _tasksRepository.GetTask(id);
+
+            if (task is null) {
+                return BadRequest();
+            }
+
+            if (task.State == 1) {
+                return (await _tasksRepository.UnComplete(task))
+                    ? Ok() : BadRequest();
+            }
+
+            return (await _tasksRepository.Complete(task))
+                ? Ok() : BadRequest();
+        }
+
+        [HttpDelete]
+        [Route("notes/delete/{id}")]
+        public async Task<IActionResult> Delete(int id) {
+            var task = await _tasksRepository.GetTask(id);
+
+            if (task is null) {
+                return BadRequest();
+            }
+
+            return (await _tasksRepository.Delete(task))
+                ? Ok() : BadRequest();
+        }
     }
 }
