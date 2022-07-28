@@ -95,6 +95,7 @@ namespace TodoApp.Controllers {
                 Id = task.Id,
                 GroupId = group.Id,
                 Text = task.Text,
+                State = task.State,
                 States = _selectListHelper.GetStates(),
                 FinishDate = task.EndDate
             };

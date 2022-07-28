@@ -74,6 +74,7 @@ namespace TodoApp.Controllers {
             var model = new EditNoteViewModel {
                 Id = note.Id,
                 Text = note.Text,
+                State = note.State,
                 States = _selectListHelper.GetStates()
             };
 

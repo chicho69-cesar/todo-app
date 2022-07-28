@@ -1,0 +1,61 @@
+﻿@model EditTaskViewModel
+
+@{
+    ViewData["Title"] = "Edita esta nota";
+}
+
+<link rel="stylesheet" href="~/css/notes/general-notes.css" asp-append-version="true"/>
+<link rel="stylesheet" href="~/css/notes/edit.css" asp-append-version="true"/>
+<link rel="stylesheet" href="~/css/tasks/create.css" asp-append-version="true"/>
+
+<section class="container">
+    <form asp-action="Edit" asp-controller="TaskWorks" enctype="multipart/form-data" class="form">
+        <div asp-validation-summary="ModelOnly" class="error"></div>
+
+        <input type="hidden" asp-for="Id"/>
+        <input type="hidden" asp-for="GroupId"/>
+
+        <div class="group">
+            <div class="label-group">
+                <label asp-for="Text" class="label"></label>
+                <span class="required">*</span>
+            </div>
+            
+            <textarea asp-for="Text" class="input" placeholder="Nota ..."></textarea>
+            <span asp-validation-for="Text" class="error"></span>
+        </div>
+
+        <div class="group">
+            <div class="label-group">
+                <label asp-for="FinishDate" class="label"></label>
+                <span class="required">*</span>
+            </div>
+
+            <input asp-for="FinishDate" class="input" placeholder="Escribe una tarea..." style="resize: none;"/>
+            <span asp-validation-for="FinishDate" class="error"></span>
+        </div>
+
+        <div class="group">
+            <label asp-for="State" class="label"></label>
+            <select asp-for="State" asp-items="Model.States" class="edit-select"></select>
+            <span asp-validation-for="State" class="error"></span>
+        </div>
+
+        <div class="buttons">
+            <button type="submit" value="Edit" class="btn ok">
+                <i class="bi bi-check-lg"></i> 
+                Aceptar
+            </button>
+
+            <a asp-action="Details" asp-controller="Groups" 
+            asp-route-groupId="@Model.GroupId" class="btn cancel">
+                <i class="bi bi-x-lg"></i> 
+                Cancelar
+            </a>
+        </div>
+    </form>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
