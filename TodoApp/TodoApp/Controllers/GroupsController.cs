@@ -61,7 +61,8 @@ namespace TodoApp.Controllers {
                 GroupId = groupId,
                 Name = group.Name,
                 ImageFullPath = imagePath,
-                Tasks = await _tasksRepository.GetAllTasks(groupId)
+                Tasks = await _tasksRepository
+                    .GetAllTasks(groupId)
             };
 
             return View(model);

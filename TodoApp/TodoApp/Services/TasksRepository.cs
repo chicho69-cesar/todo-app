@@ -17,6 +17,9 @@ namespace TodoApp.Services {
             return await _context.TaskWorks
                 .Where(t => t.GroupId == groupId)
                 .Include(t => t.Group)
+                .OrderBy(t => t.State)
+                .ThenByDescending(t => t.StartDate)
+                .ThenByDescending(t => t.EndDate)
                 .ToListAsync();
         }
 

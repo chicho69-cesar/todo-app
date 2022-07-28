@@ -151,7 +151,7 @@ namespace TodoApp.Controllers {
         }
 
         [HttpDelete]
-        [Route("notes/delete/{id}")]
+        [Route("tasks/delete/{id}")]
         public async Task<IActionResult> Delete(int id) {
             var task = await _tasksRepository.GetTask(id);
 
