@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Authorization;
@@ -37,6 +38,7 @@ builder.Services.AddAuthentication(options => {
     options.DefaultAuthenticateScheme = IdentityConstants.ApplicationScheme;
     options.DefaultChallengeScheme = IdentityConstants.ApplicationScheme;
     options.DefaultSignOutScheme = IdentityConstants.ApplicationScheme;
+    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
 }).AddCookie(IdentityConstants.ApplicationScheme, options => {
     options.LoginPath = "/Users/Login";
     options.AccessDeniedPath = "/Users/NotAuthorized";

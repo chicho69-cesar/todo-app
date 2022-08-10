@@ -6,6 +6,8 @@
     
         <title>@ViewData["Title"]</title>
 
+        <link rel="icon" type="image/png" href="~/favicon.png"/>
+
         <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
         <link rel="stylesheet" href="~/TodoApp.styles.css" asp-append-version="true" />
         <link rel="stylesheet" href="TodoApp.styles.css" asp-append-version="true"/>
@@ -15,6 +17,7 @@
         <header>
             <div class="header-container">
                 <a asp-action="Index" asp-controller="Home" class="logo-link">
+                    <img class="logo-image" src="~/favicon.png" alt="Logo TodoApp"/>
                     <h1 class="logo-text">TodoApp</h1>
                 </a>
 
